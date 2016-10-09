@@ -61,4 +61,10 @@
         android:summaryOn="@string/fingerprint_wake_unlock_touch"
         android:summaryOff="@string/fingerprint_wake_unlock_press" />
 
+    <!-- available in pin/password -->
+    <SwitchPreference
+        android:key="lockscreen_quick_unlock_control"
+        android:title="@string/unlock_quick_unlock_control_title"
+        android:summary="@string/unlock_quick_unlock_control_summary" />
+
 </PreferenceScreen>
