@@ -590,4 +590,8 @@
     <string name="trust_restrict_usb_always">Deny USB connections</string>
     <string name="trust_restrict_usb_keyguard">Allow USB connections when unlocked</string>
     <string name="trust_restrict_usb_disabled">Always allow USB connections</string>
+
+    <!-- Quick unlock -->
+    <string name="unlock_quick_unlock_control_title">Quick unlock</string>
+    <string name="unlock_quick_unlock_control_summary">Unlock automatically when the correct PIN/password is entered</string>
 </resources>
