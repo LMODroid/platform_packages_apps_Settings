@@ -21,4 +21,7 @@
 
     <!-- About phone screen, LMODroid version -->
     <string name="rom_version_title">LMODroid version</string>
+
+    <!-- Volume link notification -->
+    <string name="volume_link_notification_title">Link ring &amp; notification volumes</string>
 </resources>
