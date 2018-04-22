@@ -20,6 +20,11 @@
     <string name="adb_enable_root">Rooted debugging</string>
     <string name="adb_enable_summary_root">Allow running Android debugging as root</string>
 
+    <!-- Applications: Long screen -->
+    <string name="long_screen_settings_title">Full screen apps</string>
+    <string name="long_screen_settings_summary">Force legacy apps to use full screen aspect ratio</string>
+    <string name="long_screen_settings_no_apps">No apps</string>
+
     <!-- Backup Transport selection settings menu and activity title -->
     <string name="backup_transport_setting_label">Change backup provider</string>
     <string name="backup_transport_title">Select backup provider</string>

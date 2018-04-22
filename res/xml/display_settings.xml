@@ -150,6 +150,13 @@
             android:summary="@string/show_operator_name_summary"/>
 
         <Preference
+            android:key="long_screen_settings"
+            android:title="@string/long_screen_settings_title"
+            android:summary="@string/long_screen_settings_summary"
+            android:fragment="com.android.settings.libremobileos.applications.LongScreenSettings"
+            settings:controller="com.android.settings.libremobileos.applications.LongScreenController" />
+
+        <Preference
             android:key="screensaver"
             android:title="@string/screensaver_settings_title"
             android:fragment="com.android.settings.dream.DreamSettings"
