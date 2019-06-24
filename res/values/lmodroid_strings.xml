@@ -595,4 +595,7 @@
     <string name="app_lock_timeout_10min">10 minutes</string>
     <string name="app_lock_timeout_30min">30 minutes</string>
 
+    <!-- Private DNS -->
+    <string name="private_dns_mode_cloudflare" translatable="false">Cloudflare DNS</string>
+
 </resources>
