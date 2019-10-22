@@ -672,4 +672,8 @@
     <!-- String for removal of sensitive info on about, depending on tap -->
     <string name="device_info_protected_single_press">Tap to show info</string>
 
+    <!-- Show Lockscreen shortcuts on secure Lockscreen -->
+    <string name="lockscreen_show_shortcuts_title">Show Bottom Shortcuts</string>
+    <string name="lockscreen_show_shortcuts_summary">Show Left-Right Shortcuts on secure lock screens</string>
+
 </resources>

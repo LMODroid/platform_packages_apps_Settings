@@ -55,6 +55,12 @@
             android:title="@string/lockscreen_media_art_title"
             android:defaultValue="false" />
 
+        <com.libremobileos.support.preferences.SecureSettingSwitchPreference
+            android:key="lockscreen_show_shortcuts"
+            android:title="@string/lockscreen_show_shortcuts_title"
+            android:summary="@string/lockscreen_show_shortcuts_summary"
+            android:defaultValue="false" />
+
         <SwitchPreference
             android:key="lockscreen_privacy_wallet_switch"
             android:title="@string/lockscreen_privacy_wallet_setting_toggle"
