@@ -71,7 +71,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
 
     private PreferenceCategory mStatusBarBatteryCategory;
     private PreferenceCategory mStatusBarClockCategory;
-    private Preference mNetworkTrafficPref;
 
     private boolean mHasNotch;
 
@@ -80,12 +79,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.status_bar_settings);
 
-        mNetworkTrafficPref = findPreference(NETWORK_TRAFFIC_SETTINGS);
-
         mHasNotch = DeviceUtils.hasNotch(getActivity());
-        if (mHasNotch) {
-            getPreferenceScreen().removePreference(mNetworkTrafficPref);
-        }
 
         mStatusBarAmPm = findPreference(STATUS_BAR_AM_PM);
         mStatusBarClock = findPreference(STATUS_BAR_CLOCK_STYLE);
@@ -131,7 +125,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
             mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
         }
 
-        final boolean disallowCenteredClock = mHasNotch || getNetworkTrafficStatus() != 0;
+        final boolean disallowCenteredClock = mHasNotch;
 
         // Adjust status bar preferences for RTL
         if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
@@ -151,9 +145,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
             mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries);
             mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values);
         }
-
-        // Disable network traffic preferences if clock is centered in the status bar
-        updateNetworkTrafficStatus(getClockPosition());
     }
 
     @Override
@@ -163,9 +154,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         switch (key) {
             case STATUS_BAR_QUICK_QS_PULLDOWN:
                 updateQuickPulldownSummary(value);
-                break;
-            case STATUS_BAR_CLOCK_STYLE:
-                updateNetworkTrafficStatus(value);
                 break;
             case STATUS_BAR_BATTERY_STYLE:
                 enableStatusBarBatteryDependents(value);
@@ -198,25 +186,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         mQuickPulldown.setSummary(summary);
     }
 
-    private void updateNetworkTrafficStatus(int clockPosition) {
-        if (mHasNotch) {
-            // Unconditional no network traffic for you
-            return;
-        }
-
-        boolean isClockCentered = clockPosition == 1;
-        mNetworkTrafficPref.setEnabled(!isClockCentered);
-        mNetworkTrafficPref.setSummary(getResources().getString(isClockCentered ?
-                R.string.network_traffic_disabled_clock :
-                R.string.network_traffic_settings_summary
-        ));
-    }
-
-    private int getNetworkTrafficStatus() {
-        return Settings.Secure.getInt(getActivity().getContentResolver(),
-                Settings.Secure.NETWORK_TRAFFIC_MODE, 0);
-    }
-
     private int getClockPosition() {
         return Settings.System.getInt(getActivity().getContentResolver(),
                 STATUS_BAR_CLOCK_STYLE, 2);
@@ -234,9 +203,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         public List<String> getNonIndexableKeys(Context context) {
             final List<String> result = super.getNonIndexableKeys(context);
 
-            if (DeviceUtils.hasNotch(context)) {
-                result.add(NETWORK_TRAFFIC_SETTINGS);
-            }
+            result.add(NETWORK_TRAFFIC_SETTINGS);
             return result;
         }
     };
