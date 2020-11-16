@@ -27,9 +27,14 @@ android_library {
         "SettingsLib-search-defaults",
     ],
 
-    srcs: ["src/**/*.java"],
+    srcs: ["src/**/*.java",
+           "lmodroidlab/**/*.java",],
 
-    aaptflags: ["--extra-packages github.com.st235.lib_expandablebottombar",],
+    resource_dirs: ["res",
+                    "lmodroidlab/res"],
+
+    aaptflags: ["--extra-packages com.libremobileos.lmodroidlab",
+                "--extra-packages github.com.st235.lib_expandablebottombar",],
 
     static_libs: [
         "androidx-constraintlayout_constraintlayout",
