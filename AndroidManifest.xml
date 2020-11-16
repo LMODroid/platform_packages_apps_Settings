@@ -3450,5 +3450,12 @@
                 android:resource="@string/lmodroidlab_summary"/>
         </activity>
 
+        <!-- LMODroid Team dialog -->
+        <activity android:name="com.libremobileos.lmodroidlab.fragments.team.TeamActivity"
+                  android:taskAffinity=""
+                  android:parentActivityName="Settings"
+                  android:theme="@style/TeamDialog"
+                  android:label="@string/dialog_team_title" />
+
     </application>
 </manifest>
