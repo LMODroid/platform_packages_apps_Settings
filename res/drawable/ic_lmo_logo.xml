@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Copyright (C) 2020 The LibreMobileOS Foundation
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
+    android:viewportWidth="71.84668"
+    android:viewportHeight="71.84669"
+    android:width="254.5748dp"
+    android:height="254.5749dp">
+    <group
+        android:translateX="-37.31952"
+        android:translateY="-50.05063">
+        <group
+            android:scaleX="0.4374161"
+            android:scaleY="0.4374161"
+            android:translateX="23.0365"
+            android:translateY="28.84145">
+            <path
+                android:pathData="M160.23168 151.99713l-33.11205 0.49913m33.30895 -0.60089l-30.94421 -56.080968m-20.42053 27.420758l20.24983 -27.369089m1.45745 -17.498814l-27.31726 35.270993m27.47823 -34.955453l45.83871 81.513113m-0.19826 0.0164l-102.224442 0.40559m8.05747 -8.12789l-30.375102 0.57774M119.1924 152.38645L85.200515 95.879985M52.110227 152.988L85.081534 95.880026M194.92146 130.84022A79.999116 79.999116 0 0 1 114.92234 210.83933 79.999116 79.999116 0 0 1 34.923222 130.84022 79.999116 79.999116 0 0 1 114.92234 50.841094 79.999116 79.999116 0 0 1 194.92146 130.84022ZM45.293621 35.162645H186.25099c14.04623 0 25.35421 11.30798 25.35421 25.354214V201.47424c0 14.04622 -11.30798 25.35421 -25.35421 25.35421H45.293621c-14.046234 0 -25.354214 -11.30799 -25.354214 -25.35421V60.516859c0 -14.046234 11.30798 -25.354214 25.354214 -25.354214z"
+                android:strokeColor="?android:attr/colorAccent"
+                android:strokeWidth="4.206913"
+                android:strokeLineCap="round"
+                android:strokeLineJoin="bevel"
+                android:strokeMiterLimit="4.2" />
+        </group>
+    </group>
+</vector>
