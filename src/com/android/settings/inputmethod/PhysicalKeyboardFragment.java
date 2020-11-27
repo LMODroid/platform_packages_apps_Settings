@@ -71,6 +71,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
 
     private static final String KEYBOARD_OPTIONS_CATEGORY = "keyboard_options_category";
     private static final String KEYBOARD_A11Y_CATEGORY = "keyboard_a11y_category";
+    private static final String KEYBOARD_EXTRAS_CATEGORY = "keyboard_extras_category";
     private static final String ACCESSIBILITY_BOUNCE_KEYS = "accessibility_bounce_keys";
     private static final String ACCESSIBILITY_SLOW_KEYS = "accessibility_slow_keys";
     private static final String ACCESSIBILITY_STICKY_KEYS = "accessibility_sticky_keys";
@@ -103,6 +104,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
     private PreferenceCategory mKeyboardAssistanceCategory;
     @Nullable
     private PreferenceCategory mKeyboardA11yCategory = null;
+    @NonNull
+    private PreferenceCategory mKeyboardExtrasCategory;
     @Nullable
     private TwoStatePreference mAccessibilityBounceKeys = null;
     @Nullable
@@ -132,6 +135,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         mImm = Preconditions.checkNotNull(activity.getSystemService(InputMethodManager.class));
         mKeyboardAssistanceCategory = Preconditions.checkNotNull(
                 findPreference(KEYBOARD_OPTIONS_CATEGORY));
+        mKeyboardExtrasCategory = Preconditions.checkNotNull(
+                findPreference(KEYBOARD_EXTRAS_CATEGORY));
 
         mKeyboardA11yCategory = Objects.requireNonNull(findPreference(KEYBOARD_A11Y_CATEGORY));
         mAccessibilityBounceKeys = Objects.requireNonNull(
@@ -330,6 +335,8 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
         }
         mKeyboardAssistanceCategory.setOrder(1);
         preferenceScreen.addPreference(mKeyboardAssistanceCategory);
+        mKeyboardExtrasCategory.setOrder(99);
+        preferenceScreen.addPreference(mKeyboardExtrasCategory);
         if (mSupportsFirmwareUpdate) {
             mFeatureProvider.addFirmwareUpdateCategory(getPrefContext(), preferenceScreen);
         }
