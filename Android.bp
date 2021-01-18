@@ -79,6 +79,7 @@ android_library {
         "lottie",
         "windowExtLib",
         "VendorSupport-preference",
+        "vendor.lineage.fastcharge-V1.0-java",
     ],
 
     libs: [
