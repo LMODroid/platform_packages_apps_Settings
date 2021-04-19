@@ -628,4 +628,8 @@
     <!-- Summary message for checkbox that restricts background network access of a specific application. [CHAR LIMIT=NONE] -->
     <string name="data_usage_app_restrict_background_all_summary">Enable network usage in the background</string>
 
+    <!-- Access QS on lockscreen -->
+    <string name="show_qs_on_secure_keyguard_title">Quick settings</string>
+    <string name="show_qs_on_secure_keyguard_summary">Allow toggling quick settings on secure lockscreen</string>
+
 </resources>
