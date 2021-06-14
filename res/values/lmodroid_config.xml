@@ -26,6 +26,9 @@
         <item>com.android.localtransport/.LocalTransport</item>
     </string-array>
 
+    <!-- Whether to show peak refresh rate in display settings -->
+    <bool name="config_show_peak_refresh_rate_switch">false</bool>
+
     <!-- The position of the volume rocker, as opposed to the natural
          orientation of the display.
          Currently used for the volume button re-orient functionality.
