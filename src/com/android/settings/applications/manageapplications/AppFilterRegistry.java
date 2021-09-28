@@ -69,6 +69,7 @@ public class AppFilterRegistry {
                 FILTER_APPS_CLONE,
                 FILTER_APPS_NFC_TAG,
                 FILTER_APPS_TURN_SCREEN_ON,
+                FILTER_APPS_HIDDEN,
             })
     @interface FilterType {}
 
@@ -101,7 +102,8 @@ public class AppFilterRegistry {
     public static final int FILTER_APPS_CLONE = 25;
     public static final int FILTER_APPS_NFC_TAG = 26;
     public static final int FILTER_APPS_TURN_SCREEN_ON = 27;
-    private static final int NUM_FILTER_ENTRIES = 28;
+    public static final int FILTER_APPS_HIDDEN = 28;
+    private static final int NUM_FILTER_ENTRIES = 29;
     // Next id: 28. If you add an entry here, please change NUM_FILTER_ENTRIES.
 
     private static AppFilterRegistry sRegistry;
@@ -280,6 +282,11 @@ public class AppFilterRegistry {
                 AppStateTurnScreenOnBridge.FILTER_TURN_SCREEN_ON_APPS,
                 FILTER_APPS_TURN_SCREEN_ON,
                 R.string.turn_screen_on_title);
+        // Apps that are hidden
+        mFilters[FILTER_APPS_HIDDEN] = new AppFilterItem(
+                ApplicationsState.FILTER_HIDDEN,
+                FILTER_APPS_HIDDEN,
+                R.string.filter_hidden_apps);
     }
 
     public static AppFilterRegistry getInstance() {
