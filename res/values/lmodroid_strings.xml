@@ -611,4 +611,7 @@
     <string name="qs_footer_datausage_title">Data usage</string>
     <string name="qs_footer_datausage_summary">Display data usage summary in quick settings footer</string>
 
+    <string name="hide">Hide</string>
+    <string name="unhide">Unhide</string>
+
 </resources>
