@@ -58,6 +58,7 @@ android_library {
     resource_dirs: [
         "res",
         "res-export", // for external usage
+        "res-lmo",
         "res-product",
         "TouchGestures/res",
     ],
