@@ -84,7 +84,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.top_level_settings;
+        return R.xml.lmo_top_level_settings;
     }
 
     @Override
@@ -339,7 +339,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     @Override
     protected Preference createPreference(Tile tile) {
-        return new HomepagePreference(getPrefContext());
+        Preference p = new HomepagePreference(getPrefContext());
+        p.setLayoutResource(R.layout.lmo_dashboard_preference_middle);
+        return p;
     }
 
     void reloadHighlightMenuKey() {
@@ -376,7 +378,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.top_level_settings) {
+            new BaseSearchIndexProvider(R.xml.lmo_top_level_settings) {
 
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
