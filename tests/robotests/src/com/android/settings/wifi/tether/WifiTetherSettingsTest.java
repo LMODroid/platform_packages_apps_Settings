@@ -297,6 +297,7 @@ public class WifiTetherSettingsTest {
         assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
         assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED);
         assertThat(keys).doesNotContain(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
+        assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_HIDDEN_SSID);
     }
 
     @Test
@@ -315,6 +316,7 @@ public class WifiTetherSettingsTest {
         assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
         assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED);
         assertThat(keys).contains(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_HIDDEN_SSID);
     }
 
     @Test
@@ -351,6 +353,7 @@ public class WifiTetherSettingsTest {
         assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
         assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED);
         assertThat(keys).contains(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_HIDDEN_SSID);
     }
 
     @Test
@@ -371,6 +374,7 @@ public class WifiTetherSettingsTest {
         assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED);
         // contains
         assertThat(keys).contains(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
+        assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_TETHER_HIDDEN_SSID);
     }
 
     @Test
@@ -388,6 +392,7 @@ public class WifiTetherSettingsTest {
         assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_AUTO_OFF);
         assertThat(keys).doesNotContain(WifiTetherSettings.KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
         assertThat(keys).doesNotContain(WifiTetherSettings.KEY_INSTANT_HOTSPOT);
+
         // contains
         assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_HOTSPOT_SECURITY);
         assertThat(keys).contains(WifiTetherSettings.KEY_WIFI_HOTSPOT_SPEED);
