@@ -72,8 +72,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_AUTO_OFF = "wifi_tether_auto_turn_off";
     @VisibleForTesting
-    static final String KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY =
-            WifiTetherMaximizeCompatibilityPreferenceController.PREF_KEY;
+    static final String KEY_WIFI_TETHER_AP_BAND = "wifi_tether_network_ap_band";
     @VisibleForTesting
     static final String KEY_WIFI_HOTSPOT_SECURITY = "wifi_hotspot_security";
     @VisibleForTesting
@@ -92,11 +91,11 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     WifiTetherSecurityPreferenceController mSecurityPreferenceController;
     @VisibleForTesting
-    WifiTetherMaximizeCompatibilityPreferenceController mMaxCompatibilityPrefController;
-    @VisibleForTesting
     WifiTetherAutoOffPreferenceController mWifiTetherAutoOffPreferenceController;
     @VisibleForTesting
     WifiTetherHiddenSsidPreferenceController mHiddenSsidPrefController;
+    @VisibleForTesting
+    WifiTetherApBandPreferenceController mApBandPrefController;
 
     private boolean mUnavailable;
     private WifiRestriction mWifiRestriction;
@@ -178,8 +177,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         mSSIDPreferenceController = use(WifiTetherSSIDPreferenceController.class);
         mSecurityPreferenceController = use(WifiTetherSecurityPreferenceController.class);
         mPasswordPreferenceController = use(WifiTetherPasswordPreferenceController.class);
-        mMaxCompatibilityPrefController =
-                use(WifiTetherMaximizeCompatibilityPreferenceController.class);
+        mApBandPrefController = use(WifiTetherApBandPreferenceController.class);
         mWifiTetherAutoOffPreferenceController = use(WifiTetherAutoOffPreferenceController.class);
         mHiddenSsidPrefController = use(WifiTetherHiddenSsidPreferenceController.class);
     }
@@ -264,7 +262,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         controllers.add(new WifiTetherPasswordPreferenceController(context, listener));
         controllers.add(
                 new WifiTetherAutoOffPreferenceController(context, KEY_WIFI_TETHER_AUTO_OFF));
-        controllers.add(new WifiTetherMaximizeCompatibilityPreferenceController(context, listener));
+        controllers.add(new WifiTetherApBandPreferenceController(context, listener));
         controllers.add(new WifiTetherHiddenSsidPreferenceController(context, listener));
         return controllers;
     }
@@ -298,7 +296,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                         : mPasswordPreferenceController.getPasswordValidated(securityType);
         configBuilder.setPassphrase(passphrase, securityType);
         if (!mWifiTetherViewModel.isSpeedFeatureAvailable()) {
-            mMaxCompatibilityPrefController.setupMaximizeCompatibility(configBuilder);
+            mApBandPrefController.setupBands(configBuilder);
         }
         configBuilder.setAutoShutdownEnabled(
                 mWifiTetherAutoOffPreferenceController.isEnabled());
@@ -310,7 +308,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         use(WifiTetherSSIDPreferenceController.class).updateDisplay();
         use(WifiTetherSecurityPreferenceController.class).updateDisplay();
         use(WifiTetherPasswordPreferenceController.class).updateDisplay();
-        use(WifiTetherMaximizeCompatibilityPreferenceController.class).updateDisplay();
+        use(WifiTetherApBandPreferenceController.class).updateDisplay();
         use(WifiTetherHiddenSsidPreferenceController.class).updateDisplay();
     }
 
@@ -343,7 +341,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                 keys.add(KEY_WIFI_TETHER_SECURITY);
                 keys.add(KEY_WIFI_TETHER_NETWORK_PASSWORD);
                 keys.add(KEY_WIFI_TETHER_AUTO_OFF);
-                keys.add(KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY);
+                keys.add(KEY_WIFI_TETHER_AP_BAND);
                 keys.add(KEY_WIFI_TETHER_HIDDEN_SSID);
             }
 
