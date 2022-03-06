@@ -54,6 +54,18 @@ public class DeviceUtils {
         return displayCutoutExists;
     }
 
+    public static boolean hasCenterNotch(Context context) {
+        if (context.getResources().getBoolean(com.android.internal.R.bool.config_haveNotch))
+            return true;
+        if (hasNotch(context)) {
+            String displayCutout = context.getResources().getString(com.android.internal.R.string.config_mainBuiltInDisplayCutout);
+            if (displayCutout.endsWith("@right") || displayCutout.endsWith("@left"))
+                return false;
+            return true;
+        }
+        return false;
+    }
+
     public static int getDeviceKeys(Context context) {
         return context.getResources().getInteger(
                 com.android.internal.R.integer.config_deviceHardwareKeys);
