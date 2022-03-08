@@ -51,6 +51,7 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.wifi.WifiEnterpriseRestrictionUtils;
 
 import com.android.settings.libremobileos.tether.WifiTetherHiddenSsidPreferenceController;
+import com.android.settings.libremobileos.tether.WifiTetherAutoOffPreferenceController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +97,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     WifiTetherHiddenSsidPreferenceController mHiddenSsidPrefController;
     @VisibleForTesting
     WifiTetherApBandPreferenceController mApBandPrefController;
+    @VisibleForTesting
+    WifiTetherAutoOffPreferenceController mAutoOffPrefController;
 
     private boolean mUnavailable;
     private WifiRestriction mWifiRestriction;
@@ -180,6 +183,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         mApBandPrefController = use(WifiTetherApBandPreferenceController.class);
         mWifiTetherAutoOffPreferenceController = use(WifiTetherAutoOffPreferenceController.class);
         mHiddenSsidPrefController = use(WifiTetherHiddenSsidPreferenceController.class);
+        mAutoOffPrefController = use(WifiTetherAutoOffPreferenceController.class);
     }
 
     @Override
@@ -298,9 +302,8 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         if (!mWifiTetherViewModel.isSpeedFeatureAvailable()) {
             mApBandPrefController.setupBands(configBuilder);
         }
-        configBuilder.setAutoShutdownEnabled(
-                mWifiTetherAutoOffPreferenceController.isEnabled());
         configBuilder.setHiddenSsid(mHiddenSsidPrefController.isHiddenSsidEnabled());
+        mAutoOffPrefController.updateConfig(configBuilder);
         return configBuilder.build();
     }
 
@@ -310,6 +313,7 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         use(WifiTetherPasswordPreferenceController.class).updateDisplay();
         use(WifiTetherApBandPreferenceController.class).updateDisplay();
         use(WifiTetherHiddenSsidPreferenceController.class).updateDisplay();
+        use(WifiTetherAutoOffPreferenceController.class).updateDisplay();
     }
 
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
