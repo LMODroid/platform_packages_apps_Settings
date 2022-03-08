@@ -69,6 +69,8 @@ import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.wifi.factory.WifiFeatureProvider;
 import com.android.settings.wifi.repository.WifiHotspotRepository;
 
+import com.android.settings.libremobileos.tether.WifiTetherAutoOffPreferenceController;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -178,8 +180,7 @@ public class WifiTetherSettingsTest {
         when(mSecurityPreferenceController.getSecurityType()).thenReturn(SECURITY_TYPE_WPA3_SAE);
         mSettings.mPasswordPreferenceController = mPasswordPreferenceController;
         when(mPasswordPreferenceController.getPasswordValidated(anyInt())).thenReturn(PASSWORD);
-        mSettings.mWifiTetherAutoOffPreferenceController = mWifiTetherAutoOffPreferenceController;
-        when(mWifiTetherAutoOffPreferenceController.isEnabled()).thenReturn(true);
+        mSettings.mAutoOffPrefController = mWifiTetherAutoOffPreferenceController;
         mSettings.mMaxCompatibilityPrefController = mMaxCompatibilityPrefController;
         mSettings.mWifiTetherViewModel = mWifiTetherViewModel;
         when(mSettings.findPreference(KEY_WIFI_HOTSPOT_SECURITY)).thenReturn(mWifiHotspotSecurity);
