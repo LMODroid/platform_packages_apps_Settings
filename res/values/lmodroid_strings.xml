@@ -446,4 +446,10 @@
     <string name="ambient_display_screen_off_udfps_title" product="device">Long press on fingerprint sensor to unlock device</string>
     <!-- Summary text for screen off UDFPS [CHAR LIMIT=NONE]-->
     <string name="ambient_display_screen_off_udfps_summary">To wake up your screen and unlock, long press your under-display fingerprint sensor.</string>
+
+    <!-- Applications: Long screen -->
+    <string name="long_screen_settings_title">Full screen apps</string>
+    <string name="long_screen_settings_summary">Force legacy apps to use full screen aspect ratio</string>
+    <string name="long_screen_settings_no_apps">No apps</string>
+
 </resources>
