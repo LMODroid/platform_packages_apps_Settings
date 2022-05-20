@@ -73,7 +73,9 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_NETWORK_PASSWORD = "wifi_tether_network_password";
     @VisibleForTesting
-    static final String KEY_WIFI_TETHER_AUTO_OFF = "wifi_tether_auto_turn_off";
+    // Not "wifi_tether_auto_turn_off": WifiHotspotScreen (catalyst, hybrid) binds its
+    // switch to that key, which would clash with our ListPreference.
+    static final String KEY_WIFI_TETHER_AUTO_OFF = "wifi_tether_auto_off_timeout";
     @VisibleForTesting
     static final String KEY_WIFI_TETHER_MAXIMIZE_COMPATIBILITY =
             WifiTetherMaximizeCompatibilityPreferenceController.PREF_KEY;
