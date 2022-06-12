@@ -17,4 +17,39 @@
 
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:title="@string/vibrate_when_ringing_title" />
+    android:title="@string/vibrate_when_ringing_title">
+
+    <com.android.settingslib.widget.RadioButtonPreference
+        android:key="never_vibrate"
+        android:title="@string/vibrate_when_ringing_option_never_vibrate" />
+
+    <com.android.settingslib.widget.RadioButtonPreference
+        android:key="always_vibrate"
+        android:title="@string/vibrate_when_ringing_option_always_vibrate" />
+
+    <com.android.settingslib.widget.RadioButtonPreference
+        android:key="ramping_ringer"
+        android:title="@string/vibrate_when_ringing_option_ramping_ringer" />
+
+    <!-- Incall vibration options -->
+    <PreferenceCategory
+        android:key="incall_vib_options"
+        android:title="@string/incall_vibration_category" >
+
+        <com.libremobileos.support.preferences.SystemSettingSwitchPreference
+            android:key="vibrate_on_connect"
+            android:title="@string/incall_vibrate_connect_title"
+            android:defaultValue="false" />
+
+        <com.libremobileos.support.preferences.SystemSettingSwitchPreference
+            android:key="vibrate_on_callwaiting"
+            android:title="@string/incall_vibrate_call_wait_title"
+            android:defaultValue="false" />
+
+        <com.libremobileos.support.preferences.SystemSettingSwitchPreference
+            android:key="vibrate_on_disconnect"
+            android:title="@string/incall_vibrate_disconnect_title"
+            android:defaultValue="false" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

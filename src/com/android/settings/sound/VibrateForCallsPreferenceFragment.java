@@ -17,26 +17,26 @@ package com.android.settings.sound;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.provider.Settings;
 import android.text.TextUtils;
-import android.util.ArrayMap;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.widget.RadioButtonPickerFragment;
-import com.android.settingslib.widget.CandidateInfo;
+import com.android.settings.dashboard.DashboardFragment;
+import com.android.settingslib.core.AbstractPreferenceController;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Fragment for changing vibrate for calls options.
  */
-public class VibrateForCallsPreferenceFragment extends RadioButtonPickerFragment {
+public class VibrateForCallsPreferenceFragment extends DashboardFragment
+        implements VibrateForCallsRadioButtonPreferenceController.OnChangeListener {
+
     private static final String TAG = "VibrateForCallsPreferenceFragment";
 
     @VisibleForTesting
@@ -49,83 +49,31 @@ public class VibrateForCallsPreferenceFragment extends RadioButtonPickerFragment
     private static final int ON = 1;
     private static final int OFF = 0;
 
-    private final Map<String, VibrateForCallsCandidateInfo> mCandidates;
+    private static final List<AbstractPreferenceController> sControllers = new ArrayList<>();
 
-    public VibrateForCallsPreferenceFragment() {
-        mCandidates = new ArrayMap<>();
+    private static List<AbstractPreferenceController> buildPreferenceControllers(Context context,
+            Lifecycle lifecycle) {
+        if (sControllers.size() == 0) {
+            final String[] vibratorKeys = {KEY_NEVER_VIBRATE, KEY_ALWAYS_VIBRATE, KEY_RAMPING_RINGER};
+
+            for (int i = 0; i < vibratorKeys.length; i++) {
+                sControllers.add(new VibrateForCallsRadioButtonPreferenceController(
+                        context, lifecycle, vibratorKeys[i]));
+            }
+        }
+        return sControllers;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        loadCandidates(context);
-    }
-
-    private void loadCandidates(Context context) {
-        mCandidates.put(KEY_NEVER_VIBRATE,
-                new VibrateForCallsCandidateInfo(
-                        KEY_NEVER_VIBRATE, R.string.vibrate_when_ringing_option_never_vibrate));
-        mCandidates.put(KEY_ALWAYS_VIBRATE,
-                new VibrateForCallsCandidateInfo(
-                        KEY_ALWAYS_VIBRATE, R.string.vibrate_when_ringing_option_always_vibrate));
-        mCandidates.put(KEY_RAMPING_RINGER,
-                new VibrateForCallsCandidateInfo(
-                        KEY_RAMPING_RINGER, R.string.vibrate_when_ringing_option_ramping_ringer));
-    }
-
-    private void updateSettings(VibrateForCallsCandidateInfo candidate) {
-        final String key = candidate.getKey();
-        if (TextUtils.equals(key, KEY_ALWAYS_VIBRATE)) {
-            Settings.System.putInt(
-                    getContext().getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, ON);
-            Settings.Global.putInt(
-                    getContext().getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, OFF);
-        } else if (TextUtils.equals(key, KEY_RAMPING_RINGER)) {
-            Settings.System.putInt(
-                    getContext().getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, OFF);
-            Settings.Global.putInt(
-                    getContext().getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, ON);
-        } else {
-            Settings.System.putInt(
-                    getContext().getContentResolver(), Settings.System.VIBRATE_WHEN_RINGING, OFF);
-            Settings.Global.putInt(
-                    getContext().getContentResolver(), Settings.Global.APPLY_RAMPING_RINGER, OFF);
+    public void onCheckedChanged(Preference preference) {
+        for (AbstractPreferenceController controller : sControllers) {
+            controller.updateState(preference);
         }
     }
 
     @Override
-    protected List<? extends CandidateInfo> getCandidates() {
-        final List<VibrateForCallsCandidateInfo> candidates = new ArrayList<>();
-        candidates.add(mCandidates.get(KEY_NEVER_VIBRATE));
-        candidates.add(mCandidates.get(KEY_ALWAYS_VIBRATE));
-        candidates.add(mCandidates.get(KEY_RAMPING_RINGER));
-        return candidates;
-    }
-
-    @Override
-    protected String getDefaultKey() {
-        if (Settings.Global.getInt(
-                 getContext().getContentResolver(),
-                 Settings.Global.APPLY_RAMPING_RINGER, OFF) == ON) {
-            return KEY_RAMPING_RINGER;
-        } else if (Settings.System.getInt(
-                    getContext().getContentResolver(),
-                    Settings.System.VIBRATE_WHEN_RINGING, OFF) == ON) {
-            return KEY_ALWAYS_VIBRATE;
-        } else {
-            return KEY_NEVER_VIBRATE;
-        }
-    }
-
-    @Override
-    protected boolean setDefaultKey(String key) {
-        final VibrateForCallsCandidateInfo candidate = mCandidates.get(key);
-        if (candidate == null) {
-            Log.e(TAG, "Unknown vibrate for calls candidate (key = " + key + ")!");
-            return false;
-        }
-        updateSettings(candidate);
-        return true;
+    protected String getLogTag() {
+        return TAG;
     }
 
     @Override
@@ -138,30 +86,25 @@ public class VibrateForCallsPreferenceFragment extends RadioButtonPickerFragment
         return SettingsEnums.VIBRATE_FOR_CALLS;
     }
 
-    @VisibleForTesting
-    class VibrateForCallsCandidateInfo extends CandidateInfo {
-        private final String mKey;
-        private final int mLabelId;
+    @Override
+    public void onResume() {
+        super.onResume();
 
-        VibrateForCallsCandidateInfo(String key, int labelId) {
-            super(true /* enabled */);
-            mKey = key;
-            mLabelId = labelId;
+        for (AbstractPreferenceController controller :
+                buildPreferenceControllers(getPrefContext(), getSettingsLifecycle())) {
+            ((VibrateForCallsRadioButtonPreferenceController) controller).setOnChangeListener(this);
+            ((VibrateForCallsRadioButtonPreferenceController) controller).displayPreference(
+                    getPreferenceScreen());
         }
+    }
 
-        @Override
-        public CharSequence loadLabel() {
-            return getContext().getString(mLabelId);
-        }
+    @Override
+    public void onPause() {
+        super.onPause();
 
-        @Override
-        public Drawable loadIcon() {
-            return null;
-        }
-
-        @Override
-        public String getKey() {
-            return mKey;
+        for (AbstractPreferenceController controller :
+                buildPreferenceControllers(getPrefContext(), getSettingsLifecycle())) {
+            ((VibrateForCallsRadioButtonPreferenceController) controller).setOnChangeListener(null);
         }
     }
 }

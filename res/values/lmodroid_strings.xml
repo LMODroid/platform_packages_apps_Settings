@@ -60,6 +60,12 @@
     <!-- Volume link notification -->
     <string name="volume_link_notification_title">Link ring &amp; notification volumes</string>
 
+    <!-- Incall vibrate options -->
+    <string name="incall_vibration_category">In-call vibration options</string>
+    <string name="incall_vibrate_connect_title">Vibrate on connect</string>
+    <string name="incall_vibrate_call_wait_title">Vibrate on call waiting</string>
+    <string name="incall_vibrate_disconnect_title">Vibrate on disconnect</string>
+
     <!-- Scramble pin -->
     <string name="unlock_scramble_pin_layout_title">Scramble layout</string>
     <string name="unlock_scramble_pin_layout_summary">Scramble PIN layout when unlocking device</string>
