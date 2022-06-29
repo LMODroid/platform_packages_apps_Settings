@@ -82,6 +82,7 @@ public class ScreenLockSettings extends DashboardFragment
         controllers.add(new OwnerInfoPreferenceController(context, parent));
         controllers.add(new ScramblePinPreferenceController(
                 context, MY_USER_ID, lockPatternUtils));
+        controllers.add(new FingerprintUnlockPreferenceController(context));
         return controllers;
     }
 
