@@ -613,9 +613,14 @@
     <string name="wifi_hotspot_unblock_client_dialog_text">This device \"<xliff:g id="device_name">%1$s</xliff:g>\" will be able to connect to this hotspot</string>
     <string name="wifi_hotspot_client_manager_footer_text">No clients are currently available. Connected and blocked devices will be listed here when avaialable.</string>
 
+    <!-- Hide apps -->
     <string name="hide">Hide</string>
     <string name="unhide">Unhide</string>
     <!-- Label for showing hidden apps in list [CHAR LIMIT=40] -->
     <string name="filter_hidden_apps">Hidden apps</string>
+    <string name="hide_app">Hide app</string>
+    <string name="unhide_app">Unhide app</string>
+    <string name="unhide_app_desc">If you unhide this app, it will be visible to Android and other apps again.</string>
+    <string name="hide_app_desc">If you hide this app, it will not be visible to Android and other apps, and they may no longer function as intended. Keep in mind, hiding an app preserves it data. By hiding, you turn this app off and hide it on your device.</string>
 
 </resources>
