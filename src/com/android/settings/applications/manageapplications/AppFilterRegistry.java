@@ -54,6 +54,7 @@ public class AppFilterRegistry {
             FILTER_APPS_BLOCKED,
             FILTER_ALARMS_AND_REMINDERS,
             FILTER_APPS_MEDIA_MANAGEMENT,
+            FILTER_APPS_HIDDEN,
     })
     @interface FilterType {
     }
@@ -79,14 +80,15 @@ public class AppFilterRegistry {
     public static final int FILTER_MANAGE_EXTERNAL_STORAGE = 17;
     public static final int FILTER_ALARMS_AND_REMINDERS = 18;
     public static final int FILTER_APPS_MEDIA_MANAGEMENT = 19;
-    // Next id: 20. If you add an entry here, length of mFilters should be updated
+    public static final int FILTER_APPS_HIDDEN = 20;
+    // Next id: 21. If you add an entry here, length of mFilters should be updated
 
     private static AppFilterRegistry sRegistry;
 
     private final AppFilterItem[] mFilters;
 
     private AppFilterRegistry() {
-        mFilters = new AppFilterItem[20];
+        mFilters = new AppFilterItem[21];
 
         // High power allowlist, on
         mFilters[FILTER_APPS_POWER_ALLOWLIST] = new AppFilterItem(
@@ -203,6 +205,12 @@ public class AppFilterRegistry {
                 AppStateMediaManagementAppsBridge.FILTER_MEDIA_MANAGEMENT_APPS,
                 FILTER_APPS_MEDIA_MANAGEMENT,
                 R.string.media_management_apps_title);
+
+        // Apps that are hidden
+        mFilters[FILTER_APPS_HIDDEN] = new AppFilterItem(
+                ApplicationsState.FILTER_HIDDEN,
+                FILTER_APPS_HIDDEN,
+                R.string.filter_hidden_apps);
     }
 
     public static AppFilterRegistry getInstance() {
