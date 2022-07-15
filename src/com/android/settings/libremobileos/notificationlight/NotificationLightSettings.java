@@ -180,6 +180,18 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
         } else {
             mApplicationPrefList = findPreference(APPLICATION_SECTION);
             mApplicationPrefList.setOrderingAsAdded(false);
+
+            // Get launch-able applications
+            mPackageManager = getActivity().getPackageManager();
+            mPackageAdapter = new PackageListAdapter(getActivity());
+
+            mPackages = new HashMap<String, Package>();
+
+            Preference addPreference = prefSet.findPreference(ADD_APPS);
+            addPreference.setOnPreferenceClickListener(preference -> {
+                showDialog(DIALOG_APPS);
+                return true;
+            });
         }
 
         // Get launch-able applications
@@ -194,12 +206,6 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
         } else {
             mAutoGenerateColors.setOnPreferenceChangeListener(this);
         }
-
-        Preference addPreference = prefSet.findPreference(ADD_APPS);
-        addPreference.setOnPreferenceClickListener(preference -> {
-            showDialog(DIALOG_APPS);
-            return true;
-        });
     }
 
     @Override
