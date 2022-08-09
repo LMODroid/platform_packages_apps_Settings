@@ -31,6 +31,7 @@ import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 
+import com.android.internal.util.EmergencyAffordanceManager;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.settingslib.applications.ServiceListing;
 
@@ -65,6 +66,9 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
 
     private LineageGlobalActions mLineageGlobalActions;
 
+    private EmergencyAffordanceManager mEmergencyAffordanceManager;
+    private boolean mForceEmergCheck = false;
+
     Context mContext;
     private LockPatternUtils mLockPatternUtils;
     private UserManager mUserManager;
@@ -80,6 +84,7 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         mLockPatternUtils = new LockPatternUtils(mContext);
         mUserManager = UserManager.get(mContext);
         mLineageGlobalActions = mContext.getSystemService(LineageGlobalActions.class);
+       mEmergencyAffordanceManager = new EmergencyAffordanceManager(mContext);
 
         mPowerMenuItemsCategory = findPreference(CATEGORY_POWER_MENU_ITEMS);
 
@@ -140,8 +145,10 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         }
 
         if (mEmergencyPref != null) {
+            mForceEmergCheck = mEmergencyAffordanceManager.needsEmergencyAffordance();
             mEmergencyPref.setChecked(mLineageGlobalActions.userConfigContains(
-                    GLOBAL_ACTION_KEY_EMERGENCY));
+                    GLOBAL_ACTION_KEY_EMERGENCY) || mForceEmergCheck);
+            mEmergencyPref.setEnabled(!mForceEmergCheck);
         }
 
         if (mDeviceControlsPref != null) {
@@ -224,6 +231,13 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
             } else {
                 mBugReportPref.setChecked(bugReport);
                 mBugReportPref.setSummary(null);
+            }
+        }
+        if (mEmergencyPref != null) {
+            if (mForceEmergCheck) {
+                mEmergencyPref.setSummary(R.string.power_menu_emergency_affordance_enabled);
+            } else {
+                mEmergencyPref.setSummary(null);
             }
         }
     }
