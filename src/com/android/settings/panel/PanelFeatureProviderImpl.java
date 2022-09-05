@@ -24,6 +24,8 @@ import android.util.FeatureFlagUtils;
 
 import com.android.settings.Utils;
 
+import com.libremobileos.providers.LMOSettings;
+
 public class PanelFeatureProviderImpl implements PanelFeatureProvider {
 
     @Override
@@ -61,6 +63,8 @@ public class PanelFeatureProviderImpl implements PanelFeatureProvider {
                 } else {
                     return VolumePanel.create(context);
                 }
+            case LMOSettings.Panel.ACTION_APP_VOLUME:
+                return AppVolumePanel.create(context);
         }
 
         throw new IllegalStateException("No matching panel for: " + panelType);
