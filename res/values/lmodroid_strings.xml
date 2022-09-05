@@ -571,4 +571,7 @@
     <!-- Private DNS -->
     <string name="private_dns_mode_cloudflare" translatable="false">Cloudflare DNS</string>
 
+    <!-- Warning message for the sd card setup -->
+    <string name="storage_warning_internal">Warning: This option may not work properly or lead to data loss and is therefore not recommended!</string>
+
 </resources>
