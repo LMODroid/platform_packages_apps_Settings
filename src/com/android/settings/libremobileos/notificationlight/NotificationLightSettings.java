@@ -161,8 +161,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
             mDefaultPref.setDefaultValues(mDefaultColor, mDefaultLedOn, mDefaultLedOff);
         }
 
-        // Missed call and Voicemail preferences should only show on devices with a voice capabilities
-        TelephonyManager tm = getActivity().getSystemService(TelephonyManager.class);
+        // Missed call and Voicemail preferences should only show on devices with voice capabilities        TelephonyManager tm = getActivity().getSystemService(TelephonyManager.class);
         if (tm.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE
                 || (!mLedCanPulse && !mMultiColorLed)) {
             removePreference(PHONE_SECTION);
@@ -426,9 +425,6 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
      * Updates the default or package specific notification settings.
      *
      * @param packageName Package name of application specific settings to update
-     * @param color
-     * @param timeon
-     * @param timeoff
      */
     protected void updateValues(String packageName, Integer color, Integer timeon,
                                 Integer timeoff) {
@@ -575,10 +571,6 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
 
         /**
          * Stores all the application values in one call
-         * @param name
-         * @param color
-         * @param timeon
-         * @param timeoff
          */
         public Package(String name, Integer color, Integer timeon, Integer timeoff) {
             this.name = name;
