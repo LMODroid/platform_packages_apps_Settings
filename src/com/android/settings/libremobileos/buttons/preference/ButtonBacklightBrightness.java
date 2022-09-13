@@ -255,7 +255,8 @@ public class ButtonBacklightBrightness extends CustomDialogPreference<AlertDialo
 
     private int getTimeout() {
         return Settings.Secure.getInt(mResolver,
-                Settings.Secure.BUTTON_BACKLIGHT_TIMEOUT, DEFAULT_BUTTON_TIMEOUT * 1000) / 1000;
+                Settings.Secure.BUTTON_BACKLIGHT_TIMEOUT, DEFAULT_BUTTON_TIMEOUT * 1000)
+                / 1000;
     }
 
     private void applyTimeout(int timeout) {
