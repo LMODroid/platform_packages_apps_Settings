@@ -24,6 +24,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -92,7 +93,7 @@ public class BrightnessPreference extends CustomDialogPreference<AlertDialog>
         mContext = context;
 
         // Message handler used for led notification update throttling.
-        mHandler = new Handler();
+        mHandler = new Handler(Looper.getMainLooper());
 
         mNotificationManager = context.getSystemService(NotificationManager.class);
 
@@ -239,7 +240,7 @@ public class BrightnessPreference extends CustomDialogPreference<AlertDialog>
         }
     }
 
-    private Handler mLedHandler = new Handler() {
+    private final Handler mLedHandler = new Handler(Looper.getMainLooper()) {
         public void handleMessage(Message msg) {
             updateNotification();
         }
