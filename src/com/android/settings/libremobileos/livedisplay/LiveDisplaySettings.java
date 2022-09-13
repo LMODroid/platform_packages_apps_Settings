@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2015 The CyanogenMod Project
- *               2017-2021 The LineageOS Project
+ *               2017-2022 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,20 +117,14 @@ public class LiveDisplaySettings extends SettingsPreferenceFragment implements
 
     private ListPreference mLiveDisplay;
 
-    private SwitchPreference mAntiFlicker;
-    private SwitchPreference mColorEnhancement;
-    private SwitchPreference mLowPower;
     private SwitchPreference mOutdoorMode;
     private SwitchPreference mReadingMode;
 
-    private PictureAdjustment mPictureAdjustment;
     private DisplayTemperature mDisplayTemperature;
-    private DisplayColor mDisplayColor;
 
     private ListPreference mColorProfile;
     private String[] mColorProfileSummaries;
 
-    private String[] mModeEntries;
     private String[] mModeValues;
     private String[] mModeSummaries;
 
@@ -150,7 +144,6 @@ public class LiveDisplaySettings extends SettingsPreferenceFragment implements
     private static final int DOT_INDICATOR_RIGHT_PADDING = 6;
 
     private LiveDisplayManager mLiveDisplayManager;
-    private LiveDisplayConfig mConfig;
 
     private LineageHardwareManager mHardware;
 
@@ -163,7 +156,7 @@ public class LiveDisplaySettings extends SettingsPreferenceFragment implements
 
         mHardware = LineageHardwareManager.getInstance(getActivity());
         mLiveDisplayManager = getActivity().getSystemService(LiveDisplayManager.class);
-        mConfig = mLiveDisplayManager.getConfig();
+        LiveDisplayConfig config = mLiveDisplayManager.getConfig();
 
         addPreferencesFromResource(R.xml.livedisplay);
 
@@ -176,7 +169,7 @@ public class LiveDisplaySettings extends SettingsPreferenceFragment implements
         mLiveDisplay = findPreference(KEY_LIVE_DISPLAY);
         mLiveDisplay.setValue(String.valueOf(adaptiveMode));
 
-        mModeEntries = res.getStringArray(
+        String[] modeEntries = res.getStringArray(
                 com.android.internal.R.array.live_display_entries);
         mModeValues = res.getStringArray(
                 com.android.internal.R.array.live_display_values);
@@ -185,7 +178,7 @@ public class LiveDisplaySettings extends SettingsPreferenceFragment implements
 
         int[] removeIdx = null;
         // Remove outdoor mode from lists if there is no support
-        if (!mConfig.hasFeature(MODE_OUTDOOR)) {
+        if (!config.hasFeature(MODE_OUTDOOR)) {
             removeIdx = ArrayUtils.appendInt(removeIdx,
                     ArrayUtils.indexOf(mModeValues, String.valueOf(MODE_OUTDOOR)));
         } else if (isNightDisplayAvailable) {
@@ -202,25 +195,25 @@ public class LiveDisplaySettings extends SettingsPreferenceFragment implements
         }
 
         if (removeIdx != null) {
-            String[] entriesTemp = new String[mModeEntries.length - removeIdx.length];
+            String[] entriesTemp = new String[modeEntries.length - removeIdx.length];
             String[] valuesTemp = new String[mModeValues.length - removeIdx.length];
             String[] summariesTemp = new String[mModeSummaries.length - removeIdx.length];
             int j = 0;
-            for (int i = 0; i < mModeEntries.length; i++) {
+            for (int i = 0; i < modeEntries.length; i++) {
                 if (ArrayUtils.contains(removeIdx, i)) {
                     continue;
                 }
-                entriesTemp[j] = mModeEntries[i];
+                entriesTemp[j] = modeEntries[i];
                 valuesTemp[j] = mModeValues[i];
                 summariesTemp[j] = mModeSummaries[i];
                 j++;
             }
-            mModeEntries = entriesTemp;
+            modeEntries = entriesTemp;
             mModeValues = valuesTemp;
             mModeSummaries = summariesTemp;
         }
 
-        mLiveDisplay.setEntries(mModeEntries);
+        mLiveDisplay.setEntries(modeEntries);
         mLiveDisplay.setEntryValues(mModeValues);
         mLiveDisplay.setOnPreferenceChangeListener(this);
 
@@ -229,7 +222,7 @@ public class LiveDisplaySettings extends SettingsPreferenceFragment implements
 
         mDisplayTemperature = findPreference(KEY_LIVE_DISPLAY_TEMPERATURE);
         if (isNightDisplayAvailable) {
-            if (!mConfig.hasFeature(MODE_OUTDOOR)) {
+            if (!config.hasFeature(MODE_OUTDOOR)) {
                 liveDisplayPrefs.removePreference(mLiveDisplay);
             }
             liveDisplayPrefs.removePreference(mDisplayTemperature);
@@ -237,7 +230,7 @@ public class LiveDisplaySettings extends SettingsPreferenceFragment implements
 
         mColorProfile = findPreference(KEY_LIVE_DISPLAY_COLOR_PROFILE);
         if (liveDisplayPrefs != null && mColorProfile != null
-                && (!mConfig.hasFeature(FEATURE_DISPLAY_MODES) || !updateDisplayModes())) {
+                && (!config.hasFeature(FEATURE_DISPLAY_MODES) || !updateDisplayModes())) {
             liveDisplayPrefs.removePreference(mColorProfile);
         } else {
             mHasDisplayModes = true;
@@ -247,7 +240,7 @@ public class LiveDisplaySettings extends SettingsPreferenceFragment implements
         mOutdoorMode = findPreference(KEY_LIVE_DISPLAY_AUTO_OUTDOOR_MODE);
         if (liveDisplayPrefs != null && mOutdoorMode != null
                 // MODE_AUTO implies automatic outdoor mode on HWC2
-                && (isNightDisplayAvailable || !mConfig.hasFeature(MODE_OUTDOOR))) {
+                && (isNightDisplayAvailable || !config.hasFeature(MODE_OUTDOOR))) {
             liveDisplayPrefs.removePreference(mOutdoorMode);
             mOutdoorMode = null;
         }
@@ -261,39 +254,34 @@ public class LiveDisplaySettings extends SettingsPreferenceFragment implements
             mReadingMode.setOnPreferenceChangeListener(this);
         }
 
-        mLowPower = findPreference(KEY_LIVE_DISPLAY_LOW_POWER);
-        if (advancedPrefs != null && mLowPower != null
-                && !mConfig.hasFeature(FEATURE_CABC)) {
-            advancedPrefs.removePreference(mLowPower);
-            mLowPower = null;
+        SwitchPreference lowPower = findPreference(KEY_LIVE_DISPLAY_LOW_POWER);
+        if (advancedPrefs != null && lowPower != null
+                && !config.hasFeature(FEATURE_CABC)) {
+            advancedPrefs.removePreference(lowPower);
         }
 
-        mColorEnhancement = findPreference(KEY_LIVE_DISPLAY_COLOR_ENHANCE);
-        if (advancedPrefs != null && mColorEnhancement != null
-                && !mConfig.hasFeature(FEATURE_COLOR_ENHANCEMENT)) {
-            advancedPrefs.removePreference(mColorEnhancement);
-            mColorEnhancement = null;
+        SwitchPreference colorEnhancement = findPreference(KEY_LIVE_DISPLAY_COLOR_ENHANCE);
+        if (advancedPrefs != null && colorEnhancement != null
+                && !config.hasFeature(FEATURE_COLOR_ENHANCEMENT)) {
+            advancedPrefs.removePreference(colorEnhancement);
         }
 
-        mPictureAdjustment = findPreference(KEY_PICTURE_ADJUSTMENT);
-        if (advancedPrefs != null && mPictureAdjustment != null &&
-                    !mConfig.hasFeature(FEATURE_PICTURE_ADJUSTMENT)) {
-            advancedPrefs.removePreference(mPictureAdjustment);
-            mPictureAdjustment = null;
+        PictureAdjustment pictureAdjustment = findPreference(KEY_PICTURE_ADJUSTMENT);
+        if (advancedPrefs != null && pictureAdjustment != null &&
+                    !config.hasFeature(FEATURE_PICTURE_ADJUSTMENT)) {
+            advancedPrefs.removePreference(pictureAdjustment);
         }
 
-        mDisplayColor = findPreference(KEY_DISPLAY_COLOR);
-        if (advancedPrefs != null && mDisplayColor != null &&
-                !mConfig.hasFeature(FEATURE_COLOR_ADJUSTMENT)) {
-            advancedPrefs.removePreference(mDisplayColor);
-            mDisplayColor = null;
+        DisplayColor misplayColor = findPreference(KEY_DISPLAY_COLOR);
+        if (advancedPrefs != null && misplayColor != null &&
+                !config.hasFeature(FEATURE_COLOR_ADJUSTMENT)) {
+            advancedPrefs.removePreference(misplayColor);
         }
 
-        mAntiFlicker = findPreference(KEY_LIVE_DISPLAY_ANTI_FLICKER);
-        if (liveDisplayPrefs != null && mAntiFlicker != null &&
+        SwitchPreference antiFlicker = findPreference(KEY_LIVE_DISPLAY_ANTI_FLICKER);
+        if (liveDisplayPrefs != null && antiFlicker != null &&
                 !mHardware.isSupported(LineageHardwareManager.FEATURE_ANTI_FLICKER)) {
-            liveDisplayPrefs.removePreference(mAntiFlicker);
-            mAntiFlicker = null;
+            liveDisplayPrefs.removePreference(antiFlicker);
         }
     }
 

@@ -18,7 +18,6 @@
 package com.android.settings.libremobileos.notificationlight;
 
 import android.app.Dialog;
-import android.app.NotificationManager;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -85,7 +84,6 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     private int mDefaultLedOff;
     private PackageManager mPackageManager;
     private PreferenceGroup mApplicationPrefList;
-    private NotificationBrightnessPreference mNotificationBrightnessPref;
     private SystemSettingMainSwitchPreference mEnabledPref;
     private SystemSettingSwitchPreference mCustomEnabledPref;
     private SystemSettingSwitchPreference mScreenOnLightsPref;
@@ -96,8 +94,6 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     private PackageListAdapter mPackageAdapter;
     private String mPackageList;
     private Map<String, Package> mPackages;
-    // liblights supports brightness control
-    private boolean mHALAdjustableBrightness;
     // Supports rgb color control
     private boolean mMultiColorLed;
     // Supports adjustable pulse
@@ -127,7 +123,8 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
         mDefaultLedOff = resources.getInteger(
                 com.android.internal.R.integer.config_defaultNotificationLedOff);
 
-        mHALAdjustableBrightness = LightsCapabilities.supports(
+        // liblights supports brightness control
+        final boolean halAdjustableBrightness = LightsCapabilities.supports(
                 context, LightsCapabilities.LIGHTS_ADJUSTABLE_NOTIFICATION_LED_BRIGHTNESS);
         mLedCanPulse = LightsCapabilities.supports(
                 context, LightsCapabilities.LIGHTS_PULSATING_LED);
@@ -142,14 +139,12 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
         mAutoGenerateColors = findPreference(Settings.System.NOTIFICATION_LIGHT_COLOR_AUTO);
 
         // Advanced light settings
-        mNotificationBrightnessPref =
-                findPreference(Settings.System.NOTIFICATION_LIGHT_BRIGHTNESS_LEVEL);
         mScreenOnLightsPref =
                 findPreference(Settings.System.NOTIFICATION_LIGHT_SCREEN_ON);
         mScreenOnLightsPref.setOnPreferenceChangeListener(this);
         mCustomEnabledPref =
                 findPreference(Settings.System.NOTIFICATION_LIGHT_PULSE_CUSTOM_ENABLE);
-        if (!mMultiColorLed && !mHALAdjustableBrightness) {
+        if (!mMultiColorLed && !halAdjustableBrightness) {
             removePreference(BRIGHTNESS_SECTION);
         }
         if (!mLedCanPulse && !mMultiColorLed) {
@@ -161,7 +156,8 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
             mDefaultPref.setDefaultValues(mDefaultColor, mDefaultLedOn, mDefaultLedOff);
         }
 
-        // Missed call and Voicemail preferences should only show on devices with voice capabilities        TelephonyManager tm = getActivity().getSystemService(TelephonyManager.class);
+        // Missed call and Voicemail preferences should only show on devices with voice capabilities
+        TelephonyManager tm = getActivity().getSystemService(TelephonyManager.class);
         if (tm.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE
                 || (!mLedCanPulse && !mMultiColorLed)) {
             removePreference(PHONE_SECTION);
@@ -185,7 +181,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
             mPackageManager = getActivity().getPackageManager();
             mPackageAdapter = new PackageListAdapter(getActivity());
 
-            mPackages = new HashMap<String, Package>();
+            mPackages = new HashMap<>();
 
             Preference addPreference = prefSet.findPreference(ADD_APPS);
             addPreference.setOnPreferenceClickListener(preference -> {
@@ -326,7 +322,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
             }
 
             maybeDisplayApplicationHint(context);
-            mPackageAdapter.setExcludedPackages(new HashSet<String>(mPackages.keySet()));
+            mPackageAdapter.setExcludedPackages(new HashSet(mPackages.keySet()));
         }
     }
 
@@ -409,7 +405,7 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
     }
 
     private void savePackageList(boolean preferencesUpdated) {
-        List<String> settings = new ArrayList<String>();
+        List<String> settings = new ArrayList();
         for (Package app : mPackages.values()) {
             settings.add(app.toString());
         }
@@ -604,9 +600,8 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
                 return null;
 
             try {
-                Package item = new Package(app[0], Integer.parseInt(values[0]), Integer
+                return new Package(app[0], Integer.parseInt(values[0]), Integer
                         .parseInt(values[1]), Integer.parseInt(values[2]));
-                return item;
             } catch (NumberFormatException e) {
                 return null;
             }

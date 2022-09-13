@@ -16,10 +16,8 @@
 
 package com.android.settings.libremobileos.notificationlight;
 
-import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -28,7 +26,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.View;
@@ -47,7 +44,7 @@ import com.android.settings.R;
 public class BrightnessPreference extends CustomDialogPreference<AlertDialog>
         implements SeekBar.OnSeekBarChangeListener {
 
-    private static String TAG = "BrightnessPreference";
+    private static final String TAG = "BrightnessPreference";
 
     public static final int LIGHT_BRIGHTNESS_MINIMUM = 1;
     public static final int LIGHT_BRIGHTNESS_MAXIMUM = 255;
@@ -73,13 +70,12 @@ public class BrightnessPreference extends CustomDialogPreference<AlertDialog>
     private int mLedColor = DEFAULT_LED_COLOR;
 
     private final Context mContext;
-    private final Handler mHandler;
 
     private final Notification.Builder mNotificationBuilder;
-    private NotificationManager mNotificationManager;
+    private final NotificationManager mNotificationManager;
 
     public interface OnBrightnessChangedListener {
-        public void onBrightnessChanged(int brightness);
+        void onBrightnessChanged(int brightness);
     }
 
     private OnBrightnessChangedListener mListener;
@@ -91,9 +87,6 @@ public class BrightnessPreference extends CustomDialogPreference<AlertDialog>
         setDialogLayoutResource(R.layout.dialog_brightness);
 
         mContext = context;
-
-        // Message handler used for led notification update throttling.
-        mHandler = new Handler(Looper.getMainLooper());
 
         mNotificationManager = context.getSystemService(NotificationManager.class);
 
@@ -163,11 +156,11 @@ public class BrightnessPreference extends CustomDialogPreference<AlertDialog>
         super.onBindDialogView(view);
 
         // Locate text view for percentage value
-        mDialogPercent = (TextView) view.findViewById(R.id.brightness_percent);
+        mDialogPercent = view.findViewById(R.id.brightness_percent);
 
         mVisibleLedBrightness = 0; // LED notification is not showing.
 
-        mBrightnessBar = (SeekBar) view.findViewById(R.id.brightness_seekbar);
+        mBrightnessBar = view.findViewById(R.id.brightness_seekbar);
         mBrightnessBar.setMax(LIGHT_BRIGHTNESS_MAXIMUM);
         mBrightnessBar.setMin(LIGHT_BRIGHTNESS_MINIMUM);
         mBrightnessBar.setOnSeekBarChangeListener(this);

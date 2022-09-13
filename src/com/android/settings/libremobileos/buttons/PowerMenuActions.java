@@ -43,7 +43,6 @@ import com.android.internal.libremobileos.app.LineageGlobalActions;
 import com.android.settings.libremobileos.utils.TelephonyUtils;
 import com.android.settings.libremobileos.preference.CustomDialogPreference;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -70,9 +69,7 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
     private boolean mForceEmergCheck = false;
 
     Context mContext;
-    private LockPatternUtils mLockPatternUtils;
     private UserManager mUserManager;
-    private List<String> mLocalUserConfig = new ArrayList<String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +78,6 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
         addPreferencesFromResource(R.xml.power_menu_actions_settings);
         getActivity().setTitle(R.string.power_menu_title);
         mContext = getActivity().getApplicationContext();
-        mLockPatternUtils = new LockPatternUtils(mContext);
         mUserManager = UserManager.get(mContext);
         mLineageGlobalActions = mContext.getSystemService(LineageGlobalActions.class);
        mEmergencyAffordanceManager = new EmergencyAffordanceManager(mContext);
@@ -108,8 +104,6 @@ public class PowerMenuActions extends SettingsPreferenceFragment {
             mPowerMenuItemsCategory.removePreference(mEmergencyPref);
             mEmergencyPref = null;
         }
-
-        mLocalUserConfig = mLineageGlobalActions.getLocalUserConfig();
     }
 
     @Override
