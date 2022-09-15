@@ -269,7 +269,7 @@
         <item>2</item>
         <item>3</item>
     </string-array>
-    
+
     <!-- Values for the notification light pulse spinners -->
     <string-array name="notification_pulse_length_entries" translatable="false">
         <item>@string/pulse_length_always_on</item>
@@ -324,6 +324,19 @@
         <item>300000</item>
         <item>600000</item>
         <item>1800000</item>
+    </string-array>
+
+    <!-- Restrict USB -->
+    <string-array name="trust_restrict_usb_entries" translatable="false">
+        <item>@string/trust_restrict_usb_always</item>
+        <item>@string/trust_restrict_usb_keyguard</item>
+        <item>@string/trust_restrict_usb_disabled</item>
+    </string-array>
+
+    <string-array name="trust_restrict_usb_values" translatable="false">
+        <item>2</item>
+        <item>1</item>
+        <item>0</item>
     </string-array>
 
 </resources>
