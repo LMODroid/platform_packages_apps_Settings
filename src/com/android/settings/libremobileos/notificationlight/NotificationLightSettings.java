@@ -20,7 +20,6 @@ package com.android.settings.libremobileos.notificationlight;
 import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -32,7 +31,6 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -485,12 +483,9 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
                 .setTitle(R.string.dialog_delete_title)
                 .setMessage(R.string.dialog_delete_message)
                 .setIconAttribute(android.R.attr.alertDialogIcon)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        removeCustomApplicationPref(key);
-                    }
-                })
+                .setPositiveButton(android.R.string.ok, (dialog, which) ->
+                        removeCustomApplicationPref(key)
+                )
                 .setNegativeButton(android.R.string.cancel, null);
 
         builder.show();
@@ -532,14 +527,11 @@ public class NotificationLightSettings extends SettingsPreferenceFragment implem
                 builder.setView(list);
                 dialog = builder.create();
 
-                list.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        // Add empty application definition, the user will be able to edit it later
-                        PackageItem info = (PackageItem) parent.getItemAtPosition(position);
-                        addCustomApplicationPref(info.packageName);
-                        dialog.cancel();
-                    }
+                list.setOnItemClickListener((parent, view, position, id1) -> {
+                    // Add empty application definition, the user will be able to edit it later
+                    PackageItem info = (PackageItem) parent.getItemAtPosition(position);
+                    addCustomApplicationPref(info.packageName);
+                    dialog.cancel();
                 });
                 break;
             default:
