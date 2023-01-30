@@ -603,4 +603,11 @@
     <!-- Text shown for the description of the panic option -->
     <string name="power_menu_panic_summary">Activates an emergency panic trigger.</string>
 
+    <!-- QS Settings -->
+    <string name="qs_settings_title">Quick Settings</string>
+
+    <!-- Data usage info in QS footer -->
+    <string name="qs_footer_datausage_title">Data usage</string>
+    <string name="qs_footer_datausage_summary">Display data usage summary in quick settings footer</string>
+
 </resources>
