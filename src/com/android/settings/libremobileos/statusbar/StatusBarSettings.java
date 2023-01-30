@@ -137,13 +137,15 @@ public class StatusBarSettings extends SettingsPreferenceFragment
                 mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_rtl);
             }
             mQuickPulldown.setEntries(R.array.status_bar_quick_qs_pulldown_entries_rtl);
-            mQuickPulldown.setEntryValues(R.array.status_bar_quick_qs_pulldown_values_rtl);
-        } else if (disallowCenteredClock) {
-            mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch);
-            mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch);
         } else {
-            mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries);
-            mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values);
+            if (disallowCenteredClock) {
+                mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries_notch);
+                mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values_notch);
+            } else {
+                mStatusBarClock.setEntries(R.array.status_bar_clock_position_entries);
+                mStatusBarClock.setEntryValues(R.array.status_bar_clock_position_values);
+            }
+            mQuickPulldown.setEntries(R.array.status_bar_quick_qs_pulldown_entries);
         }
     }
 

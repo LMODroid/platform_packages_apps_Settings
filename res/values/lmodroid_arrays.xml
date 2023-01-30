@@ -243,12 +243,6 @@
         <item>2</item>
     </string-array>
 
-    <string-array name="status_bar_quick_qs_pulldown_values_rtl" translatable="false">
-        <item>2</item>
-        <item>1</item>
-        <item>0</item>
-    </string-array>
-
     <!-- Network Traffic -->
     <string-array name="network_traffic_location_entries" translatable="false">
         <item>@string/network_traffic_location_disable</item>
