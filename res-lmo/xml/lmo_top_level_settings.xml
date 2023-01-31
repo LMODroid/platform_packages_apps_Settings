@@ -91,7 +91,7 @@
         android:title="@string/power_usage_summary_title"
         settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"
         settings:layout="@layout/lmo_dashboard_preference_middle"
-        android:fragment="com.android.settings.fuelgauge.PowerUsageSummary"/>
+        android:fragment="com.android.settings.fuelgauge.batteryusage.PowerUsageSummary"/>
 
     <Preference
         android:key="top_level_notification"
@@ -103,8 +103,18 @@
         android:fragment="com.android.settings.notification.ConfigureNotificationSettings"/>
 
     <Preference
-        android:key="top_level_accessibility"
+        android:key="top_level_safety_center"
         android:order="-106"
+        android:icon="@drawable/ic_settings_safety_center"
+        android:summary="@string/safety_center_summary"
+        android:title="@string/safety_center_title"
+        settings:highlightableMenuKey="@string/menu_key_safety_center"
+        settings:layout="@layout/lmo_dashboard_preference_middle"
+        settings:controller="com.android.settings.safetycenter.TopLevelSafetyCenterEntryPreferenceController"/>
+
+    <Preference
+        android:key="top_level_accessibility"
+        android:order="-105"
         android:icon="@drawable/ic_settings_accessibility"
         android:summary="@string/accessibility_settings_summary"
         android:title="@string/accessibility_settings"
@@ -113,7 +123,7 @@
         settings:controller="com.android.settings.accessibility.TopLevelAccessibilityPreferenceController" />
 
     <PreferenceCategory
-        android:order="-105"
+        android:order="-104"
         android:selectable="false"
         android:title="@string/top_level_security"
         settings:shouldDisableView="false"
@@ -126,7 +136,8 @@
         android:summary="@string/privacy_dashboard_summary"
         android:title="@string/privacy_dashboard_title"
         settings:layout="@layout/lmo_dashboard_preference_top"
-        android:fragment="com.android.settings.privacy.PrivacyDashboardFragment"/>
+        android:fragment="com.android.settings.privacy.PrivacyDashboardFragment"
+        settings:controller="com.android.settings.privacy.TopLevelPrivacyEntryPreferenceController"/>
 
     <Preference
         android:key="top_level_security"
@@ -192,6 +203,7 @@
         android:summary="@string/emergency_dashboard_summary"
         settings:layout="@layout/lmo_dashboard_preference_middle"
         android:fragment="com.android.settings.emergency.EmergencyDashboardFragment"
+        settings:isPreferenceVisible="@bool/config_show_emergency_settings"
         settings:highlightableMenuKey="@string/menu_key_emergency"/>
 
     <Preference
