@@ -114,9 +114,6 @@
     <string name="show_navbar_hint_title">Navigation hint</string>
     <string name="show_navbar_hint_summary">Show navigation hint bar at the bottom of the screen</string>
 
-    <!-- Volume link notification -->
-    <string name="volume_link_notification_title">Link ring &amp; notification volumes</string>
-
     <!-- Incall vibrate options -->
     <string name="incall_vibration_category">In-call vibration options</string>
     <string name="incall_vibrate_connect_title">Vibrate on connect</string>
