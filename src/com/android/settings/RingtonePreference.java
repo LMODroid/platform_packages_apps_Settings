@@ -24,7 +24,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.UserHandle;
 import android.provider.Settings.System;
-import android.telecom.PhoneAccountHandle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 
@@ -37,6 +36,7 @@ import androidx.preference.PreferenceManager;
  * <p>
  * If the user chooses the "Default" item, the saved string will be one of
  * {@link System#DEFAULT_RINGTONE_URI},
+ * {@link System#DEFAULT_RINGTONE2_URI},
  * {@link System#DEFAULT_NOTIFICATION_URI}, or
  * {@link System#DEFAULT_ALARM_ALERT_URI}. If the user chooses the "Silent"
  * item, the saved string will be an empty string.
@@ -52,10 +52,12 @@ public class RingtonePreference extends Preference {
 
     private static final String TAG = "RingtonePreference";
 
+    // Default is slot0
+    private int mSlotId = 0;
+
     private int mRingtoneType;
     private boolean mShowDefault;
     private boolean mShowSilent;
-    private PhoneAccountHandle mPhoneAccountHandle;
 
     private int mRequestCode;
     protected int mUserId;
@@ -87,22 +89,22 @@ public class RingtonePreference extends Preference {
     }
 
     /**
-     * Sets the {@link PhoneAccountHandle} that this preference belongs to.
+     * Sets the slot id that this preference belongs to.
      *
-     * @param phoneAccountHandle The {@link PhoneAccountHandle} that this preference belongs to.
+     * @param slotId The slot id that this preference belongs to.
      */
-    public void setPhoneAccountHandle(PhoneAccountHandle phoneAccountHandle) {
-        mPhoneAccountHandle = phoneAccountHandle;
+    public void setSlotId(int slotId) {
+        mSlotId = slotId;
     }
 
     /**
-     * Returns the {@link PhoneAccountHandle} that this preference belongs to.
+     * Returns the slot id that this preference belongs to.
      *
-     * @return The {@link PhoneAccountHandle} that this preference belongs to.
-     * @see #setPhoneAccountHandle(PhoneAccountHandle)
+     * @return The slot id that this preference belongs to.
+     * @see #setSlotId(int)
      */
-    public PhoneAccountHandle getPhoneAccountHandle() {
-        return mPhoneAccountHandle;
+    public int getSlotId() {
+        return mSlotId;
     }
 
     /**
@@ -183,7 +185,7 @@ public class RingtonePreference extends Preference {
         ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, mShowDefault);
         if (mShowDefault) {
             ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_DEFAULT_URI,
-                    RingtoneManager.getDefaultUri(getRingtoneType()));
+                    RingtoneManager.getDefaultUriBySlot(getRingtoneType(), getSlotId()));
         }
 
         ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, mShowSilent);

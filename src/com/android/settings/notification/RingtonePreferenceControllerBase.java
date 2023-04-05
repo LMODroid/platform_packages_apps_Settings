@@ -52,9 +52,9 @@ public abstract class RingtonePreferenceControllerBase extends AbstractPreferenc
     }
 
     private void updateSummary(Preference preference) {
-        final Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUriForPhoneAccountHandle(
-                mContext, getRingtoneType(),
-                        ((RingtonePreference)preference).getPhoneAccountHandle());
+        final Uri ringtoneUri = RingtoneManager.getActualDefaultRingtoneUriBySlot(mContext,
+                getRingtoneType(), ((RingtonePreference)preference).getSlotId());
+
         final CharSequence summary;
         try {
             summary = Ringtone.getTitle(
