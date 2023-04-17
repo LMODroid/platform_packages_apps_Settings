@@ -712,4 +712,8 @@
     <string name="old_mobiletype_title">Old style signal icon</string>
     <string name="old_mobiletype_summary">Merge signal and signal type icons</string>
 
+    <!-- Navbar -->
+    <string name="navbar_tuner_title">Navbar tuner</string>
+    <string name="navbar_tuner_summary">Customize your navbar layout</string>
+
 </resources>
