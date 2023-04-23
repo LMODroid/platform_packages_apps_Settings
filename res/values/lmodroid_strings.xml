@@ -716,4 +716,11 @@
     <string name="navbar_tuner_title">Navbar tuner</string>
     <string name="navbar_tuner_summary">Customize your navbar layout</string>
 
+    <!-- Prevent pointer accleration -->
+    <string name="prevent_pointer_acceleration_title">Pointer acceleration</string>
+    <string name="prevent_pointer_acceleration_full">Full (Pointer + Wheel)</string>
+    <string name="prevent_pointer_acceleration_wheel">Wheel only</string>
+    <string name="prevent_pointer_acceleration_pointer">Pointer only</string>
+    <string name="prevent_pointer_acceleration_none">None</string>
+
 </resources>
