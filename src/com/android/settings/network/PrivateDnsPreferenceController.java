@@ -65,7 +65,7 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
         Settings.Global.getUriFor(PRIVATE_DNS_SPECIFIER),
     };
 
-    // Must match ConnectivitySettingsUtils
+    // Only used in Settings, update on additions to ConnectivitySettingsUtils
     private static final int PRIVATE_DNS_MODE_CLOUDFLARE = 4;
 
     private final Handler mHandler;
@@ -133,16 +133,21 @@ public class PrivateDnsPreferenceController extends BasePreferenceController
             case PRIVATE_DNS_MODE_OFF:
                 return res.getString(R.string.private_dns_mode_off);
             case PRIVATE_DNS_MODE_CLOUDFLARE:
-                return dnsesResolved
-                        ? res.getString(R.string.private_dns_mode_cloudflare)
-                        : res.getString(R.string.private_dns_mode_provider_failure);
             case PRIVATE_DNS_MODE_OPPORTUNISTIC:
                 return dnsesResolved ? res.getString(R.string.private_dns_mode_on)
                         : res.getString(R.string.private_dns_mode_opportunistic);
             case PRIVATE_DNS_MODE_PROVIDER_HOSTNAME:
-                return dnsesResolved
-                        ? PrivateDnsModeDialogPreference.getHostnameFromSettings(cr)
-                        : res.getString(R.string.private_dns_mode_provider_failure);
+                if (!dnsesResolved) {
+                    return res.getString(R.string.private_dns_mode_provider_failure);
+                }
+                final String privateDnsHostname =
+                        ConnectivitySettingsManager.getPrivateDnsHostname(mContext);
+                final String cloudflareHostname =
+                        res.getString(R.string.private_dns_hostname_cloudflare);
+                if (privateDnsHostname.equals(cloudflareHostname)) {
+                    return res.getString(R.string.private_dns_mode_cloudflare);
+                }
+                return PrivateDnsModeDialogPreference.getHostnameFromSettings(cr);
         }
         return "";
     }
