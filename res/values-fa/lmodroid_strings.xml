@@ -35,9 +35,9 @@
     <!-- About phone screen, LMODroid version -->
     <string name="rom_version_title">نسخه LMODroid</string>
 
-    <!-- Hotspot extras -->
-    <string name="tethering_allow_vpn_upstreams_title">اجازه استفاده از VPN برای مشتریان</string>
-    <string name="tethering_allow_vpn_upstreams_summary">اجازه استفاده از اتصالات VPN این دستگاه برای اتصال به شبکه بالادستی</string>
+    <!-- Hotspot extras --> 
+    <string name="tethering_allow_vpn_upstreams_title">اجازه استفاده کاربران از VPN این دستگاه</string> 
+    <string name="tethering_allow_vpn_upstreams_summary">عبور اینترنت کاربران از داخل VPN این دستگاه</string>
 
     <!-- Display settings screen, peak refresh rate settings summary [CHAR LIMIT=NONE] -->
     <string name="peak_refresh_rate_summary_custom">به طور خودکار نرخ تازه‌سازی را از ۶۰ به %1$d هرتز برای برخی محتواها افزایش می‌دهد. مصرف باتری را افزایش می‌دهد.</string>
@@ -46,8 +46,8 @@
     <string name="device_info_protected_single_press">لمس برای نمایش اطلاعات</string>
 
     <!-- Double tap to sleep on status bar or lockscreen -->
-    <string name="status_bar_double_tap_to_sleep_title">لمس برای خوابیدن</string>
-    <string name="status_bar_double_tap_to_sleep_summary">دو بار لمس بر روی نوار وضعیت یا صفحه قفل برای خاموش کردن صفحه نمایش</string>
+    <string name="status_bar_double_tap_to_sleep_title">ضربه برای خوابیدن</string>
+    <string name="status_bar_double_tap_to_sleep_summary">دو بار ضربه بر روی نوار وضعیت یا صفحه قفل برای خاموش کردن صفحه نمایش</string>
 
     <!-- Game Space -->
     <string name="game_space_title">فضای بازی</string>
@@ -127,7 +127,7 @@
     <string name="high_touch_sensitivity_summary">افزایش حساسیت لمس برای استفاده با دستکش</string>
 
     <!-- Notification sound timeout -->
-    <string name="app_notification_sound_timeout_title">حداقل زمان بین صداهای اطلاعیه</string>
+    <string name="app_notification_sound_timeout_title">حداقل زمان بین صداهای اعلان</string>
     <string name="app_notification_sound_timeout_summary_template">اجازه‌ی صدا یا لرزش فقط یک بار در هر<xliff:g id="duration">%1$s</xliff:g></string>
     <string name="app_notification_sound_timeout_value_none">بدون محدودیت</string>
     <string name="app_notification_sound_timeout_value_10_seconds">10 ثانیه</string>
@@ -279,7 +279,7 @@
     <string name="disable_navkeys_summary">فعال کردن نوار ناوبری صفحه نمایش و غیرفعال کردن دکمه‌های سخت‌افزاری</string>
 
     <!-- Buttons - Swap capacitive keys -->
-    <string name="swap_capacitive_keys_title">جابه‌جایی دکمه‌های خازنی</string>
+    <string name="swap_capacitive_keys_title">جابه‌جایی دکمه‌های فیزیکی</string>
     <string name="swap_capacitive_keys_summary">جابه‌جایی ترتیب دکمه‌های جدید و برگشت</string>
 
     <!-- Others settings -->
@@ -564,8 +564,8 @@
     <string name="app_lock_timeout_summary">مدت زمان پس از آن که یک برنامه باز در پس‌زمینه بوده قفل شود</string>
     <string name="app_lock_notifications_title">حذف اطلاعیه‌ها</string>
     <string name="app_lock_notifications_summary">
-    Notification content will be hidden and collapsed for selected apps when they are locked.
-    Heads up notifications will be automatically disabled.
+وقتی برنامه‌های انتخابی قفل می‌شوند، محتوای اعلان‌ها پنهان و جمع می‌شود.
+     اعلان‌های هدزآپ به طور خودکار غیرفعال می‌شوند.
     </string>
     <string name="app_lock_notifications_disabled_summary">ابتدا یک برنامه را محافظت کنید</string>
     <string name="app_lock_biometrics_allowed_title">فعال کردن بیومتریک برای باز کردن قفل</string>
@@ -573,7 +573,7 @@
     <string name="enable_protection">فعال کردن حفاظت</string>
     <string name="hide_from_launcher_title">مخفی کردن از صفحه نمایش اصلی</string>
     <string name="hide_from_launcher_summary">
-    Prevent this application from showing up in launcher. Requires a launcher restart for changes to take effect.
+    از نمایش این برنامه در لانچر جلوگیری کنید. برای اعمال تغییرات به راه اندازی مجدد نیاز دارد.
     </string>
     <string name="app_lock_timeout_5sec">5 ثانیه</string>
     <string name="app_lock_timeout_10sec">10 ثانیه</string>
@@ -582,9 +582,6 @@
     <string name="app_lock_timeout_5min">5 دقیقه</string>
     <string name="app_lock_timeout_10min">10 دقیقه</string>
     <string name="app_lock_timeout_30min">30 دقیقه</string>
-
-    <!-- Private DNS -->
-    <string name="private_dns_mode_cloudflare" translatable="false">Cloudflare DNS</string>
 
     <!-- Text shown for the title of the panic option -->
     <string name="power_menu_panic_title">تریگر وحشت</string>
@@ -698,7 +695,7 @@
 
     <!-- QS Transparency -->
     <string name="qs_transparency_title">شفافیت پس زمینه</string>
-    <string name="qs_transparency_summary">تنظیم سطح شفافیت پس زمینه Quick Settings</string>
+    <string name="qs_transparency_summary">تنظیم سطح شفافیت پس زمینه تنظیمات سریع</string>
 
     <!-- Blur -->
     <string name="window_blur">فعال کردن افزودن اثر پرده</string>
