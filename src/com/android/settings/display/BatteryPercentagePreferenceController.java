@@ -15,7 +15,7 @@
  */
 package com.android.settings.display;
 
-import static android.provider.Settings.System.SHOW_BATTERY_PERCENT;
+import static android.provider.Settings.System.STATUS_BAR_SHOW_BATTERY_PERCENT;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -67,7 +67,7 @@ public class BatteryPercentagePreferenceController extends BasePreferenceControl
     @Override
     public void updateState(Preference preference) {
         int setting = Settings.System.getInt(mContext.getContentResolver(),
-                SHOW_BATTERY_PERCENT, 0);
+                STATUS_BAR_SHOW_BATTERY_PERCENT, 0);
 
         ((SwitchPreference) preference).setChecked(setting == 1);
     }
@@ -75,7 +75,7 @@ public class BatteryPercentagePreferenceController extends BasePreferenceControl
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         boolean showPercentage = (Boolean) newValue;
-        Settings.System.putInt(mContext.getContentResolver(), SHOW_BATTERY_PERCENT,
+        Settings.System.putInt(mContext.getContentResolver(), STATUS_BAR_SHOW_BATTERY_PERCENT,
                 showPercentage ? 1 : 0);
         FeatureFactory.getFactory(mContext).getMetricsFeatureProvider()
                 .action(mContext, SettingsEnums.OPEN_BATTERY_PERCENTAGE, showPercentage);
