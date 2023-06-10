@@ -65,6 +65,13 @@
         android:fragment="com.android.settings.libremobileos.notificationlight.BatteryLightSettings"
         settings:controller="com.android.settings.libremobileos.notificationlight.BatteryLightPreferenceController" />
 
+    <!-- Charging control -->
+    <Preference
+        android:key="charging_control"
+        android:title="@string/charging_control_title"
+        android:fragment="com.android.settings.libremobileos.health.ChargingControlSettings"
+        settings:controller="com.android.settings.libremobileos.health.ChargingControlPreferenceController" />
+
     <SwitchPreference
         android:key="battery_percentage"
         android:title="@string/battery_percentage"
