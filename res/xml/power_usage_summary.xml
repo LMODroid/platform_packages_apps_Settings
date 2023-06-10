@@ -57,6 +57,13 @@
         settings:requiresConfig="@*android:integer/config_deviceLightCapabilities"
         settings:requiresConfigMask="64" />
 
+    <!-- Charging control -->
+    <com.libremobileos.support.preferences.SelfRemovingPreference
+        android:key="charging_control"
+        android:title="@string/charging_control_title"
+        android:fragment="com.android.settings.libremobileos.health.ChargingControlSettings"
+        settings:requiresService="lineagehealth" />
+
     <SwitchPreference
         android:key="battery_percentage"
         android:title="@string/battery_percentage"
