@@ -127,7 +127,7 @@
     <uses-permission android:name="lineageos.permission.MANAGE_LIVEDISPLAY" />
 
     <!-- App lock -->
-    <uses-permission android:name="android.permission.MANAGE_APP_LOCK" />
+    <uses-permission android:name="com.android.permission.MANAGE_APP_LOCK" />
 
     <application
             android:name=".SettingsApplication"
@@ -4603,7 +4603,7 @@
         <!-- App lock -->
         <activity android:name=".security.applock.AppLockCredentialActivity"
             android:exported="false"
-            android:permission="android.permission.MANAGE_APP_LOCK"
+            android:permission="com.android.permission.MANAGE_APP_LOCK"
             android:excludeFromRecents="true"
             android:stateNotNeeded="true"
             android:taskAffinity="com.android.settings.applock"
