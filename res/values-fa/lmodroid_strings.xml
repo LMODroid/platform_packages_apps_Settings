@@ -723,4 +723,8 @@
     <string name="transistent_task_mode_allow">فعال (بعضی برنامه‌ها باقی می‌مانند)</string>
     <string name="transistent_task_mode_force">اجبار (بازبینی عملکرد برنامه‌ها را تغییر می‌دهد)</string>
 
+    <!-- Sound Settings -->
+    <string name="ringtone1_title">آهنگ زنگ تلفن - سیم کارت ۱</string>
+    <string name="ringtone2_title">آهنگ زنگ تلفن - سیم کارت ۲</string>
+
 </resources>
