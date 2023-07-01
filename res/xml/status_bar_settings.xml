@@ -44,12 +44,6 @@
             <intent android:action="com.android.settings.action.STATUS_BAR_TUNER" />
         </Preference>
 
-        <com.libremobileos.support.preferences.SystemSettingSwitchPreference
-            android:key="use_old_mobiletype"
-            android:title="@string/old_mobiletype_title"
-            android:summary="@string/old_mobiletype_summary"
-            android:defaultValue="@*android:bool/config_useOldMobileIcons" />
-
         <com.libremobileos.support.preferences.SecureSettingSwitchPreference
             android:key="show_wifi_standard_icon"
             android:title="@string/show_wifi_standard_icon_title"
