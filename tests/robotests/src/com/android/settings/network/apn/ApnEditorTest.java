@@ -513,6 +513,27 @@ public class ApnEditorTest {
     }
 
     @Test
+    @Config(shadows = ShadowFragment.class)
+    public void onCreate_notAdminUser_shouldFinish() {
+        doReturn(false).when(mUserManager).isAdminUser();
+
+        mApnEditorUT.onCreate(null);
+
+        verify(mApnEditorUT).finish();
+    }
+
+    @Test
+    @Config(shadows = ShadowFragment.class)
+    public void onCreate_hasUserRestriction_shouldFinish() {
+        doReturn(true).when(mUserManager)
+                .hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
+
+        mApnEditorUT.onCreate(null);
+
+        verify(mApnEditorUT).finish();
+    }
+
+    @Test
     public void testOnViewStateRestored_customizedValueWithoutDefault_shouldShowCustomized() {
         mApnEditorUT.mDefaultApnProtocol = "IP";
         mApnEditorUT.mApnData.mData[ApnEditor.PROTOCOL_INDEX] = null;
