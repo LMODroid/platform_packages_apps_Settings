@@ -130,34 +130,34 @@
         settings:enabled="false" />
 
     <Preference
-        android:key="top_level_privacy"
+        android:key="top_level_location"
         android:order="-100"
+        android:icon="@drawable/ic_settings_location"
+        android:summary="@string/location_settings_loading_app_permission_stats"
+        android:title="@string/location_settings_title"
+        settings:controller="com.android.settings.location.TopLevelLocationPreferenceController"
+        settings:layout="@layout/lmo_dashboard_preference_top"
+        android:fragment="com.android.settings.location.LocationSettings"/>
+
+    <Preference
+        android:key="top_level_privacy"
+        android:order="-99"
         android:icon="@drawable/ic_settings_privacy"
         android:summary="@string/privacy_dashboard_summary"
         android:title="@string/privacy_dashboard_title"
-        settings:layout="@layout/lmo_dashboard_preference_top"
+        settings:layout="@layout/lmo_dashboard_preference_middle"
         android:fragment="com.android.settings.privacy.PrivacyDashboardFragment"
         settings:controller="com.android.settings.privacy.TopLevelPrivacyEntryPreferenceController"/>
 
     <Preference
         android:key="top_level_security"
-        android:order="-99"
+        android:order="-98"
         android:icon="@drawable/ic_settings_security_white"
         android:summary="@string/security_dashboard_summary"
         android:title="@string/security_settings_title"
         settings:layout="@layout/lmo_dashboard_preference_middle"
         android:fragment="com.android.settings.security.SecuritySettings"
         settings:controller="com.android.settings.security.TopLevelSecurityEntryPreferenceController"/>
-
-    <Preference
-        android:key="top_level_location"
-        android:order="-98"
-        android:icon="@drawable/ic_settings_location"
-        android:summary="@string/location_settings_loading_app_permission_stats"
-        android:title="@string/location_settings_title"
-        settings:controller="com.android.settings.location.TopLevelLocationPreferenceController"
-        settings:layout="@layout/lmo_dashboard_preference_middle"
-        android:fragment="com.android.settings.location.LocationSettings"/>
 
     <Preference
         android:key="top_level_accounts"
