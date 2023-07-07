@@ -103,16 +103,6 @@
         android:fragment="com.android.settings.notification.ConfigureNotificationSettings"/>
 
     <Preference
-        android:key="top_level_safety_center"
-        android:order="-106"
-        android:icon="@drawable/ic_settings_safety_center"
-        android:summary="@string/safety_center_summary"
-        android:title="@string/safety_center_title"
-        settings:highlightableMenuKey="@string/menu_key_safety_center"
-        settings:layout="@layout/lmo_dashboard_preference_middle"
-        settings:controller="com.android.settings.safetycenter.TopLevelSafetyCenterEntryPreferenceController"/>
-
-    <Preference
         android:key="top_level_accessibility"
         android:order="-105"
         android:icon="@drawable/ic_settings_accessibility"
@@ -131,13 +121,23 @@
 
     <Preference
         android:key="top_level_location"
-        android:order="-100"
+        android:order="-101"
         android:icon="@drawable/ic_settings_location"
         android:summary="@string/location_settings_loading_app_permission_stats"
         android:title="@string/location_settings_title"
         settings:controller="com.android.settings.location.TopLevelLocationPreferenceController"
         settings:layout="@layout/lmo_dashboard_preference_top"
         android:fragment="com.android.settings.location.LocationSettings"/>
+
+    <Preference
+        android:key="top_level_safety_center"
+        android:order="-100"
+        android:icon="@drawable/ic_settings_safety_center"
+        android:summary="@string/safety_center_summary"
+        android:title="@string/safety_center_title"
+        settings:highlightableMenuKey="@string/menu_key_safety_center"
+        settings:layout="@layout/lmo_dashboard_preference_middle"
+        settings:controller="com.android.settings.safetycenter.TopLevelSafetyCenterEntryPreferenceController"/>
 
     <Preference
         android:key="top_level_privacy"
