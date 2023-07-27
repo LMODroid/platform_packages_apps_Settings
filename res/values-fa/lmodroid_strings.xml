@@ -715,13 +715,13 @@
     <string name="prevent_pointer_acceleration_pointer">فقط پوینتر</string>
     <string name="prevent_pointer_acceleration_none">هیچکدام</string>
 
-    <!-- Transistent task mode (Tadi mode) -->
-    <string name="transistent_task_mode_title">حالت کاری موقت</string>
-    <string name="transistent_task_mode_dialog_title">حالت کاری موقت (برای اعمال تغییرات دستگاه خود را راه‌اندازی مجدد کنید)</string>
-    <string name="transistent_task_mode_summary">بستن برنامه‌ها از لیست اخیر زمانی که آخرین فعالیت با استفاده از دکمه برگشت بسته شود.</string>
-    <string name="transistent_task_mode_default">غیرفعال (پیش‌فرض)</string>
-    <string name="transistent_task_mode_allow">فعال (بعضی برنامه‌ها باقی می‌مانند)</string>
-    <string name="transistent_task_mode_force">اجبار (بازبینی عملکرد برنامه‌ها را تغییر می‌دهد)</string>
+    <!-- Transient task mode (Tadi mode) -->
+    <string name="transient_task_mode_title">حالت کاری موقت</string>
+    <string name="transient_task_mode_dialog_title">حالت کاری موقت (برای اعمال تغییرات دستگاه خود را راه‌اندازی مجدد کنید)</string>
+    <string name="transient_task_mode_summary">بستن برنامه‌ها از لیست اخیر زمانی که آخرین فعالیت با استفاده از دکمه برگشت بسته شود.</string>
+    <string name="transient_task_mode_default">غیرفعال (پیش‌فرض)</string>
+    <string name="transient_task_mode_allow">فعال (بعضی برنامه‌ها باقی می‌مانند)</string>
+    <string name="transient_task_mode_force">اجبار (بازبینی عملکرد برنامه‌ها را تغییر می‌دهد)</string>
 
     <!-- Sound Settings -->
     <string name="ringtone1_title">آهنگ زنگ تلفن - سیم کارت ۱</string>
