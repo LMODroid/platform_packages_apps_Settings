@@ -227,7 +227,7 @@
     <Preference
         android:key="top_level_about_device"
         android:order="20"
-        android:icon="@drawable/ic_phone_info"
+        android:icon="@drawable/ic_settings_about_device"
         android:title="@string/about_settings"
         android:summary="@string/summary_placeholder"
         settings:layout="@layout/lmo_dashboard_preference_bottom"
