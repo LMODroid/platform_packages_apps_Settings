@@ -54,7 +54,7 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import static com.android.systemui.shared.recents.utilities.Utilities.isTablet;
+import static com.android.systemui.shared.recents.utilities.Utilities.isLargeScreen;
 
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
@@ -500,7 +500,7 @@ public class ButtonSettings extends SettingsPreferenceFragment
                 mEnableTaskbar.setOnPreferenceChangeListener(this);
                 mEnableTaskbar.setChecked(Settings.System.getInt(getContentResolver(),
                         Settings.System.ENABLE_TASKBAR,
-                        isTablet(getContext()) ? 1 : 0) == 1);
+                        isLargeScreen(getContext()) ? 1 : 0) == 1);
                 toggleTaskBarDependencies(mEnableTaskbar.isChecked());
             }
         }
