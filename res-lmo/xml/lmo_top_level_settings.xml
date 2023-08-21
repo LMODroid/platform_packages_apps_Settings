@@ -25,6 +25,7 @@
         android:order="-205"
         android:selectable="false"
         android:title="@string/top_level_connectivity"
+        settings:layout="@layout/lmo_first_header_pref"
         settings:shouldDisableView="false"
         settings:enabled="false" />
 

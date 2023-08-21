@@ -328,7 +328,9 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     @Override
     protected Preference createPreference(Tile tile) {
-        return new HomepagePreference(getPrefContext());
+        Preference p = new HomepagePreference(getPrefContext());
+        p.setLayoutResource(R.layout.lmo_dashboard_preference_middle);
+        return p;
     }
 
     void reloadHighlightMenuKey() {
@@ -342,14 +344,6 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             return;
         }
         PreferenceScreen screen = getPreferenceScreen();
-        for (int i = 0; i < screen.getPreferenceCount(); i++) {
-            Preference pref = screen.getPreference(i);
-            boolean isValid = pref.isEnabled() && pref.isVisible() && pref.getTitle() != null;
-            if (isValid && pref.getLayoutResource() != R.layout.lmo_dashboard_preference_top &&
-                pref.getLayoutResource() != R.layout.lmo_dashboard_preference_bottom) {
-                pref.setLayoutResource(R.layout.lmo_dashboard_preference_middle);
-            }
-        }
         if (screen == null) {
             return;
         }
