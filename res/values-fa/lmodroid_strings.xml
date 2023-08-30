@@ -541,10 +541,6 @@
     <string name="three_finger_gesture">عکس‌برداری با حرکت انگشت</string>
     <string name="three_finger_gesture_summary">با سه انگشت به پایین لمس کنید تا یک عکس بگیرید</string>
 
-    <!-- Pocket judge -->
-    <string name="pocket_judge_title">شناسایی در جیب</string>
-    <string name="pocket_judge_summary">مسدود کردن ورودی‌های صفحه و دکمه‌ها وقتی دستگاه در جیب است</string>
-
     <!-- Wi-Fi Standard icon -->
     <string name="show_wifi_standard_icon_title">نمایش آیکون استاندارد Wi-Fi</string>
     <string name="show_wifi_standard_icon_summary">نمایش نوع Wi-Fi در نشانگر سیگنال Wi-Fi</string>
