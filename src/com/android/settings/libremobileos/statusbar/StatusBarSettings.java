@@ -31,16 +31,13 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.libremobileos.utils.DeviceUtils;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
-import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settingslib.search.SearchIndexable;
 
 import com.libremobileos.support.preferences.SystemSettingListPreference;
 
 import java.util.List;
 import java.util.Set;
 
-@SearchIndexable
 public class StatusBarSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
@@ -71,21 +68,11 @@ public class StatusBarSettings extends SettingsPreferenceFragment
 
     private PreferenceCategory mStatusBarBatteryCategory;
     private PreferenceCategory mStatusBarClockCategory;
-    private Preference mNetworkTrafficPref;
-
-    private boolean mHasCenteredCutout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.status_bar_settings);
-
-        mNetworkTrafficPref = findPreference(NETWORK_TRAFFIC_SETTINGS);
-
-        mHasCenteredCutout = DeviceUtils.hasCenteredCutout(getActivity());
-        if (mHasCenteredCutout) {
-            getPreferenceScreen().removePreference(mNetworkTrafficPref);
-        }
 
         mStatusBarAmPm = findPreference(STATUS_BAR_AM_PM);
         mStatusBarClock = findPreference(STATUS_BAR_CLOCK_STYLE);
@@ -131,7 +118,8 @@ public class StatusBarSettings extends SettingsPreferenceFragment
             mStatusBarAmPm.setSummary(R.string.status_bar_am_pm_info);
         }
 
-        final boolean disallowCenteredClock = mHasCenteredCutout || getNetworkTrafficStatus() != 0;
+        final boolean disallowCenteredClock = DeviceUtils.hasCenteredCutout(getActivity())
+                    || getNetworkTrafficStatus() != 0;
 
         // Adjust status bar preferences for RTL
         if (getResources().getConfiguration().getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
@@ -154,8 +142,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
             mQuickPulldown.setEntries(R.array.status_bar_quick_qs_pulldown_entries);
         }
 
-        // Disable network traffic preferences if clock is centered in the status bar
-        updateNetworkTrafficStatus(getClockPosition());
     }
 
     @Override
@@ -167,7 +153,6 @@ public class StatusBarSettings extends SettingsPreferenceFragment
                 updateQuickPulldownSummary(value);
                 break;
             case STATUS_BAR_CLOCK_STYLE:
-                updateNetworkTrafficStatus(value);
                 break;
             case STATUS_BAR_BATTERY_STYLE:
                 enableStatusBarBatteryDependents(value);
@@ -200,46 +185,16 @@ public class StatusBarSettings extends SettingsPreferenceFragment
         mQuickPulldown.setSummary(summary);
     }
 
-    private void updateNetworkTrafficStatus(int clockPosition) {
-        if (mHasCenteredCutout) {
-            // Unconditional no network traffic for you
-            return;
-        }
-
-        boolean isClockCentered = clockPosition == 1;
-        mNetworkTrafficPref.setEnabled(!isClockCentered);
-        mNetworkTrafficPref.setSummary(getResources().getString(isClockCentered ?
-                R.string.network_traffic_disabled_clock :
-                R.string.network_traffic_settings_summary
-        ));
-    }
-
     private int getNetworkTrafficStatus() {
-        return Settings.Secure.getInt(getActivity().getContentResolver(),
+        int mode = Settings.Secure.getInt(getActivity().getContentResolver(),
                 Settings.Secure.NETWORK_TRAFFIC_MODE, 0);
-    }
-
-    private int getClockPosition() {
-        return Settings.System.getInt(getActivity().getContentResolver(),
-                STATUS_BAR_CLOCK_STYLE, 2);
+        int position = Settings.Secure.getInt(getActivity().getContentResolver(),
+                Settings.Secure.NETWORK_TRAFFIC_POSITION, /* Center */ 1);
+        return mode != 0 && position == 1 ? 1 : 0;
     }
 
     @Override
     public int getMetricsCategory() {
         return MetricsEvent.LMODROID;
     }
-
-    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.status_bar_settings) {
-
-        @Override
-        public List<String> getNonIndexableKeys(Context context) {
-            final List<String> result = super.getNonIndexableKeys(context);
-
-            if (DeviceUtils.hasCenteredCutout(context)) {
-                result.add(NETWORK_TRAFFIC_SETTINGS);
-            }
-            return result;
-        }
-    };
 }
