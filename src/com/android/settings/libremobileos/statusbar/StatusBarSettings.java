@@ -31,13 +31,16 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.libremobileos.utils.DeviceUtils;
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.R;
+import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settingslib.search.SearchIndexable;
 
 import com.libremobileos.support.preferences.SystemSettingListPreference;
 
 import java.util.List;
 import java.util.Set;
 
+@SearchIndexable
 public class StatusBarSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceChangeListener {
 
@@ -197,4 +200,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment
     public int getMetricsCategory() {
         return MetricsEvent.LMODROID;
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider(R.xml.status_bar_settings);
 }
