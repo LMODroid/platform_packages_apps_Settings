@@ -178,5 +178,13 @@
             android:title="@string/heads_up_notifications_enabled_title"
             android:summary="@string/heads_up_notifications_enabled_summary" />
 
+        <!-- Edge Light -->
+        <Preference
+            android:key="ambient_edge_light"
+            android:title="@string/ambient_edge_light_title"
+            android:summary="@string/ambient_edge_light_summary"
+            android:fragment="com.android.settings.libremobileos.edgelight.AmbientEdgeLightSettings"
+            settings:controller="com.android.settings.libremobileos.edgelight.AmbientEdgeLightPreferenceController" />
+
     </PreferenceCategory>
 </PreferenceScreen>

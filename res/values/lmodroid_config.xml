@@ -54,4 +54,7 @@
     <!-- Whether to show LMO features (button, status bar) in System settings -->
     <bool name="config_show_lmo_features_settings">true</bool>
 
+    <!-- Whether to show Ambient Edge Light feature in Settings Options -->
+    <bool name="config_show_ambient_edge_light">false</bool>
+
 </resources>
