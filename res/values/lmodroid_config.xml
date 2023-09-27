@@ -48,4 +48,7 @@
              (true for some tablets) -->
     <integer name="config_volumeRockerVsDisplayOrientation">1</integer>
 
+    <!-- Whether to show Assisted GPS switch in Locations settings -->
+    <bool name="config_show_assisted_gps_switch">true</bool>
+
 </resources>
