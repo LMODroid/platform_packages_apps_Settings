@@ -984,6 +984,13 @@ public class ButtonSettings extends SettingsPreferenceFragment
             new BaseSearchIndexProvider(R.xml.button_settings) {
 
         @Override
+        protected boolean isPageSearchEnabled(Context context) {
+            // Enable page search only if LMO features are available.
+            return context.getResources()
+                    .getBoolean(R.bool.config_show_lmo_features_settings);
+        }
+
+        @Override
         public List<String> getNonIndexableKeys(Context context) {
             final List<String> result = super.getNonIndexableKeys(context);
 

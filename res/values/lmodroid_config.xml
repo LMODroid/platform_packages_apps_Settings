@@ -51,4 +51,7 @@
     <!-- Whether to show Assisted GPS switch in Locations settings -->
     <bool name="config_show_assisted_gps_switch">true</bool>
 
+    <!-- Whether to show LMO features (button, status bar) in System settings -->
+    <bool name="config_show_lmo_features_settings">true</bool>
+
 </resources>
