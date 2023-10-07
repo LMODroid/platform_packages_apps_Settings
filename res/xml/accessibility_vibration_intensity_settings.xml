@@ -47,22 +47,19 @@
         android:key="incall_vib_options"
         android:title="@string/incall_vibration_category" >
 
-        <com.libremobileos.support.preferences.SystemSettingSwitchPreference
+        <SwitchPreference
             android:key="vibrate_on_connect"
             android:title="@string/incall_vibrate_connect_title"
-            android:defaultValue="false"
             app:controller="com.android.settings.accessibility.InCallConnectVibrationTogglePreferenceController" />
 
-        <com.libremobileos.support.preferences.SystemSettingSwitchPreference
+        <SwitchPreference
             android:key="vibrate_on_callwaiting"
             android:title="@string/incall_vibrate_call_wait_title"
-            android:defaultValue="false"
             app:controller="com.android.settings.accessibility.InCallWaitingVibrationTogglePreferenceController" />
 
-        <com.libremobileos.support.preferences.SystemSettingSwitchPreference
+        <SwitchPreference
             android:key="vibrate_on_disconnect"
             android:title="@string/incall_vibrate_disconnect_title"
-            android:defaultValue="false"
             app:controller="com.android.settings.accessibility.InCallDisconnectVibrationTogglePreferenceController" />
   </PreferenceCategory>
 
