@@ -54,6 +54,7 @@ private class AppButtonsPresenter(
     private val appArchiveButton =
         AppArchiveButton(packageInfoPresenter, isHibernationSwitchEnabledStateFlow)
     private val appRestoreButton = AppRestoreButton(packageInfoPresenter)
+    private val appHideButton = AppHideButton(packageInfoPresenter)
 
     @Composable
     fun getActionButtons() =
@@ -78,6 +79,7 @@ private class AppButtonsPresenter(
             appUninstallButton.getActionButton(app),
             appClearButton.getActionButton(app),
             appForceStopButton.getActionButton(app),
+            appHideButton.getActionButton(app),
         )
         // If the app is an HSU app and the current user is not admin, disable all action buttons.
         // This prevents non-admin users from modifying system-level apps that affect all users.
