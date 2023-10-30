@@ -60,7 +60,7 @@
                 android:title="@string/ambient_edge_light_duration_title"
                 android:max="10"
                 android:min="1"
-                android:defaultValue="3"
+                android:defaultValue="2"
                 android:dependency="pulse_ambient_light"
                 settings:units="sec" />
 
