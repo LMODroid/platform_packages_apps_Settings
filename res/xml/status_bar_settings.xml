@@ -121,11 +121,11 @@
             settings:controller="com.android.settings.libremobileos.statusbar.ShowAutoBrightnessController"
             android:defaultValue="true" />
 
-        <!-- <com.libremobileos.support.preferences.SystemSettingSwitchPreference
+        <com.libremobileos.support.preferences.SystemSettingSwitchPreference
             android:key="status_bar_brightness_control"
             android:title="@string/status_bar_toggle_brightness"
             android:summary="@string/status_bar_toggle_brightness_summary"
-            android:defaultValue="false" /> -->
+            android:defaultValue="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
