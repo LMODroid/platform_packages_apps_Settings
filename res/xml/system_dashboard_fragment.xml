@@ -113,6 +113,13 @@
             android:fragment="com.android.settings.gestures.GestureSettings"
             settings:controller="com.android.settings.gestures.GesturesSettingPreferenceController" />
 
+        <!-- Button Settings -->
+        <Preference
+            android:key="button_settings"
+            android:title="@string/button_pref_title"
+            android:icon="@drawable/ic_settings_buttons"
+            android:fragment="com.android.settings.libremobileos.buttons.ButtonSettings"/>
+
         <SwitchPreferenceCompat
             android:key="search_gesture_press_hold"
             android:title="@string/search_gesture_feature_title"
