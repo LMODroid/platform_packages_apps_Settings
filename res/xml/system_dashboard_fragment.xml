@@ -120,6 +120,13 @@
             android:icon="@drawable/ic_settings_buttons"
             android:fragment="com.android.settings.libremobileos.buttons.ButtonSettings"/>
 
+        <!-- Statusbar Settings -->
+        <Preference
+            android:key="statusbar_settings"
+            android:title="@string/status_bar_title"
+            android:icon="@drawable/ic_settings_statusbar"
+            android:fragment="com.android.settings.libremobileos.statusbar.StatusBarSettings" />
+
         <SwitchPreferenceCompat
             android:key="search_gesture_press_hold"
             android:title="@string/search_gesture_feature_title"
