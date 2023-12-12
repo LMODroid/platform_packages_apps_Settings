@@ -40,6 +40,16 @@
         settings:controller="com.android.settings.network.TopLevelNetworkEntryPreferenceController" />
 
     <Preference
+        android:key="top_level_communal"
+        android:order="-195"
+        android:icon="@drawable/ia_settings_communal"
+        android:summary="@string/communal_settings_summary"
+        android:title="@string/communal_settings_title"
+        android:fragment="com.android.settings.communal.CommunalDashboardFragment"
+        settings:layout="@layout/lmo_dashboard_preference_middle"
+        settings:controller="com.android.settings.communal.CommunalPreferenceController"/>
+
+    <Preference
         android:key="top_level_connected_devices"
         android:order="-190"
         android:icon="@drawable/ic_devices_other"
@@ -182,7 +192,7 @@
         android:order="-90"
         android:icon="@drawable/ic_apps"
         android:summary="@string/app_and_notification_dashboard_summary"
-        android:title="@string/app_and_notification_dashboard_title"
+        android:title="@string/apps_dashboard_title"
         settings:layout="@layout/lmo_dashboard_preference_top"
         android:fragment="com.android.settings.applications.AppDashboardFragment"/>
 
