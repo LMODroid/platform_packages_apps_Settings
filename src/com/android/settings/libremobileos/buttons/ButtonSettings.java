@@ -19,6 +19,7 @@ package com.android.settings.libremobileos.buttons;
 
 import static android.inputmethodservice.InputMethodService.canImeRenderGesturalNavButtons;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON;
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL_OVERLAY;
@@ -680,8 +681,8 @@ public class ButtonSettings extends SettingsPreferenceFragment
             return true;
         } else if (preference == mEnableTaskbar) {
             toggleTaskBarDependencies((Boolean) newValue);
-            if ((Boolean) newValue && is2ButtonNavigationEnabled(getContext())) {
-                // Let's switch to gestural mode if user previously had 2 buttons enabled.
+            if (((Boolean) newValue && (is2ButtonNavigationEnabled(getContext()))) || ((Boolean) newValue && (!isLargeScreen(getContext()) && is3ButtonNavigationEnabled(getContext())))) {
+                // Let's switch to gestural mode if user previously had 2 buttons or 3 buttons in mobile enabled.
                 setButtonNavigationMode(NAV_BAR_MODE_GESTURAL_OVERLAY);
             }
             Settings.System.putInt(getContentResolver(),
@@ -693,6 +694,11 @@ public class ButtonSettings extends SettingsPreferenceFragment
 
     private static boolean is2ButtonNavigationEnabled(Context context) {
         return NAV_BAR_MODE_2BUTTON == context.getResources().getInteger(
+                com.android.internal.R.integer.config_navBarInteractionMode);
+    }
+
+    private static boolean is3ButtonNavigationEnabled(Context context) {
+        return NAV_BAR_MODE_3BUTTON == context.getResources().getInteger(
                 com.android.internal.R.integer.config_navBarInteractionMode);
     }
 
