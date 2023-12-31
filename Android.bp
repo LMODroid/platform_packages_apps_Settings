@@ -52,6 +52,7 @@ android_library {
         "SettingsLibDefaults",
         "SettingsLib-search-defaults",
         "SpaPrivilegedLib-defaults",
+        "LMOSettings-defaults",
     ],
 
     srcs: ["src/**/*.java", "src/**/*.kt"],
