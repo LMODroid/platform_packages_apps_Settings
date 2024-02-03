@@ -68,5 +68,5 @@
         android:title="@string/berry_black_theme_title"
         android:summary="@string/berry_black_theme_summary"
         android:defaultValue="false"
-        settings:requiresPackage="com.libremobileos.overlay.customization.blacktheme" />
+        settings:requiresPackage="@*android:string/config_black_theme_overlay_package" />
 </PreferenceScreen>
