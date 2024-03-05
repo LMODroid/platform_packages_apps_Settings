@@ -41,7 +41,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.preference.Preference;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.internal.net.VpnConfig;
 import com.android.internal.util.ArrayUtils;
@@ -86,7 +86,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
 
     // UI preference
     private Preference mPreferenceVersion;
-    private SwitchPreference mPreferenceGlobal;
+    private SwitchPreferenceCompat mPreferenceGlobal;
     private RestrictedSwitchPreference mPreferenceAlwaysOn;
     private RestrictedSwitchPreference mPreferenceLockdown;
     private RestrictedPreference mPreferenceForget;
@@ -133,7 +133,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         mFeatureProvider = FeatureFactory.getFeatureFactory().getAdvancedVpnFeatureProvider();
 
         mPreferenceVersion = findPreference(KEY_VERSION);
-        mPreferenceGlobal = (SwitchPreference) findPreference(KEY_GLOBAL_VPN);
+        mPreferenceGlobal = (SwitchPreferenceCompat) findPreference(KEY_GLOBAL_VPN);
         mPreferenceAlwaysOn = (RestrictedSwitchPreference) findPreference(KEY_ALWAYS_ON_VPN);
         mPreferenceLockdown = (RestrictedSwitchPreference) findPreference(KEY_LOCKDOWN_VPN);
         mPreferenceForget = (RestrictedPreference) findPreference(KEY_FORGET_VPN);

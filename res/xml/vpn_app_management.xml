@@ -23,7 +23,7 @@
                 android:key="version"
                 android:selectable="false"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
                 android:key="global_vpn"
                 android:title="@string/global_vpn_title"
                 android:defaultValue="false"
