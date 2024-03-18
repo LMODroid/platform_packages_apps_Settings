@@ -64,7 +64,7 @@
         android:fragment="com.android.settings.libremobileos.health.ChargingControlSettings"
         settings:requiresService="lineagehealth" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:key="battery_percentage"
         android:title="@string/battery_percentage"
         android:summary="@string/battery_percentage_description"

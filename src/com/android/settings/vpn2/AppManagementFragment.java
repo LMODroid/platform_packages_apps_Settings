@@ -130,7 +130,7 @@ public class AppManagementFragment extends SettingsPreferenceFragment
         mPackageManager = getContext().getPackageManager();
         mDevicePolicyManager = getContext().getSystemService(DevicePolicyManager.class);
         mVpnManager = getContext().getSystemService(VpnManager.class);
-        mFeatureProvider = FeatureFactory.getFactory(getContext()).getAdvancedVpnFeatureProvider();
+        mFeatureProvider = FeatureFactory.getFeatureFactory().getAdvancedVpnFeatureProvider();
 
         mPreferenceVersion = findPreference(KEY_VERSION);
         mPreferenceGlobal = (SwitchPreference) findPreference(KEY_GLOBAL_VPN);
