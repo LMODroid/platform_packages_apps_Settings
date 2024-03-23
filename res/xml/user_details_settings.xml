@@ -25,7 +25,7 @@
             android:key="user_grant_admin"
             android:icon="@drawable/ic_admin_panel_settings"
             android:title="@string/user_grant_admin" />
-    <SwitchPreference
+    <SwitchPreferenceCompat
             android:icon="@drawable/ic_sync"
             android:key="allow_run_in_background"
             android:title="@string/user_run_in_background" />

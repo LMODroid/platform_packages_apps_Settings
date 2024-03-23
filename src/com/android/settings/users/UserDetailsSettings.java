@@ -102,7 +102,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     @VisibleForTesting
     TwoStatePreference mGrantAdminPref;
     Preference mAppsInstallsPref;
-    private SwitchPreference mRunInBackgroundPref;
+    private TwoStatePreference mRunInBackgroundPref;
 
     @VisibleForTesting
     /** The user being studied (not the user doing the studying). */
