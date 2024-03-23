@@ -234,7 +234,7 @@
             android:defaultValue="false"
             settings:requiresFeature="lineagehardware:FEATURE_HIGH_TOUCH_SENSITIVITY" />
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
             android:key="enable_blurs_on_windows"
             android:title="@string/window_blurs" />
 
