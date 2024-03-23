@@ -47,17 +47,17 @@
         android:key="incall_vib_options"
         android:title="@string/incall_vibration_category" >
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="vibrate_on_connect"
             android:title="@string/incall_vibrate_connect_title"
             app:controller="com.android.settings.accessibility.InCallConnectVibrationTogglePreferenceController" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="vibrate_on_callwaiting"
             android:title="@string/incall_vibrate_call_wait_title"
             app:controller="com.android.settings.accessibility.InCallWaitingVibrationTogglePreferenceController" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="vibrate_on_disconnect"
             android:title="@string/incall_vibrate_disconnect_title"
             app:controller="com.android.settings.accessibility.InCallDisconnectVibrationTogglePreferenceController" />
