@@ -100,8 +100,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
     @VisibleForTesting
     WifiTetherHiddenSsidPreferenceController mHiddenSsidPrefController;
     @VisibleForTesting
-    WifiTetherApBandPreferenceController mApBandPrefController;
-    @VisibleForTesting
     WifiTetherAutoOffPreferenceController mAutoOffPrefController;
     @VisibleForTesting
     WifiTetherClientManagerPreferenceController mClientPrefController;
@@ -211,7 +209,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         mSSIDPreferenceController = use(WifiTetherSSIDPreferenceController.class);
         mSecurityPreferenceController = use(WifiTetherSecurityPreferenceController.class);
         mPasswordPreferenceController = use(WifiTetherPasswordPreferenceController.class);
-        mApBandPrefController = use(WifiTetherApBandPreferenceController.class);
         mWifiTetherAutoOffPreferenceController = use(WifiTetherAutoOffPreferenceController.class);
         mHiddenSsidPrefController = use(WifiTetherHiddenSsidPreferenceController.class);
         mAutoOffPrefController = use(WifiTetherAutoOffPreferenceController.class);
@@ -299,7 +296,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         controllers.add(new WifiTetherPasswordPreferenceController(context, listener));
         controllers.add(
                 new WifiTetherAutoOffPreferenceController(context, KEY_WIFI_TETHER_AUTO_OFF));
-        controllers.add(new WifiTetherApBandPreferenceController(context, listener));
         controllers.add(new WifiTetherHiddenSsidPreferenceController(context, listener));
         controllers.add(new WifiTetherClientManagerPreferenceController(context, listener));
         return controllers;
@@ -343,9 +339,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
                         ? null
                         : mPasswordPreferenceController.getPasswordValidated(securityType);
         configBuilder.setPassphrase(passphrase, securityType);
-        if (!mWifiTetherViewModel.isSpeedFeatureAvailable()) {
-            mApBandPrefController.setupBands(configBuilder);
-        }
         configBuilder.setHiddenSsid(mHiddenSsidPrefController.isHiddenSsidEnabled());
         mAutoOffPrefController.updateConfig(configBuilder);
         mClientPrefController.updateConfig(configBuilder);
@@ -356,7 +349,6 @@ public class WifiTetherSettings extends RestrictedDashboardFragment
         use(WifiTetherSSIDPreferenceController.class).updateDisplay();
         use(WifiTetherSecurityPreferenceController.class).updateDisplay();
         use(WifiTetherPasswordPreferenceController.class).updateDisplay();
-        use(WifiTetherApBandPreferenceController.class).updateDisplay();
         use(WifiTetherHiddenSsidPreferenceController.class).updateDisplay();
         use(WifiTetherAutoOffPreferenceController.class).updateDisplay();
     }
