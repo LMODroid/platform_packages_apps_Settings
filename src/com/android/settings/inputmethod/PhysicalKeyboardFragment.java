@@ -147,8 +147,7 @@ public final class PhysicalKeyboardFragment extends SettingsPreferenceFragment
                 getContext().getString(R.string.slow_keys_summary, SLOW_KEYS_THRESHOLD));
         mAccessibilityStickyKeys = Objects.requireNonNull(
                 mKeyboardA11yCategory.findPreference(ACCESSIBILITY_STICKY_KEYS));
-        mKeyboardExtrasCategory = Preconditions.checkNotNull(
-                (PreferenceCategory) findPreference(KEYBOARD_EXTRAS_CATEGORY));
+        mKeyboardExtrasCategory = Objects.requireNonNull(findPreference(KEYBOARD_EXTRAS_CATEGORY));
 
         FeatureFactory featureFactory = FeatureFactory.getFeatureFactory();
         mMetricsFeatureProvider = featureFactory.getMetricsFeatureProvider();
