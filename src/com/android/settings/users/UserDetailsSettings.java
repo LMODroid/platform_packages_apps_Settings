@@ -501,9 +501,12 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
 
     private void enableCallsAndSms(boolean enabled) {
         mPhonePref.setChecked(enabled);
-        userRestrictions.set(UserManager.DISALLOW_OUTGOING_CALLS, !enabled);
-        // SMS is always disabled for guest
-        userRestrictions.set(UserManager.DISALLOW_SMS, mUserInfo.isGuest() || !enabled);
+        int[] userProfiles = mUserManager.getProfileIdsWithDisabled(mUserInfo.id);
+        for (int userId : userProfiles) {
+            userRestrictions.set(UserManager.DISALLOW_OUTGOING_CALLS, !enabled);
+            // SMS is always disabled for guest
+            userRestrictions.set(UserManager.DISALLOW_SMS, mUserInfo.isGuest() || !enabled);
+        }
     }
 
     /**

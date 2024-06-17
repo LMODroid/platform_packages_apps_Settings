@@ -34,6 +34,7 @@ import com.android.settingslib.spa.framework.util.mapItem
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.ui.SpinnerOption
+import com.android.settingslib.spaprivileged.framework.compose.getPlaceholder
 import com.android.settingslib.spaprivileged.model.app.AppListModel
 import com.android.settingslib.spaprivileged.model.app.AppRecord
 import com.android.settingslib.spaprivileged.model.app.installed
@@ -137,7 +138,11 @@ class AllAppListModel(
     override fun getSummary(option: Int, record: AppRecordWithSize): () -> String {
         val storageSummary = record.app.getStorageSummary()
         return {
-            val summaryList = mutableListOf(storageSummary.value)
+            val summaryList = mutableListOf<String>()
+            val storageSummaryValue = storageSummary.value
+            if (storageSummaryValue.isNotBlank()) {
+                summaryList += storageSummaryValue
+            }
             when {
                 isHidden(record) -> {
                     summaryList += context.getString(R.string.hidden)
@@ -152,6 +157,7 @@ class AllAppListModel(
                 }
             }
             summaryList.joinToString(separator = System.lineSeparator())
+                .ifEmpty { context.getPlaceholder() } // Use placeholder to reduce flaky
         }
     }
 
