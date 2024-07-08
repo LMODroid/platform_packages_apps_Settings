@@ -200,6 +200,13 @@
         android:defaultValue="false"
         android:order="-5"/>
 
+    <com.libremobileos.support.preferences.SecureSettingSwitchPreference
+        android:key="volume_panel_on_left"
+        android:title="@string/volume_panel_on_left_title"
+        android:summary="@string/volume_panel_on_left_summary"
+        android:order="-6"
+        settings:controller="com.android.settings.notification.VolumePanelOnLeftController"/>
+
     <!-- Dial pad tones -->
     <SwitchPreferenceCompat
         android:key="dial_pad_tones"
