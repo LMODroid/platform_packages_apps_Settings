@@ -30,7 +30,7 @@ import com.google.android.setupdesign.GlifPreferenceLayout;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 /** Provides utility methods to accessibility settings for Setup Wizard only. */
-class AccessibilitySetupWizardUtils {
+public class AccessibilitySetupWizardUtils {
 
     private AccessibilitySetupWizardUtils(){}
 
