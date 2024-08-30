@@ -38,6 +38,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.Preference;
 
@@ -62,6 +63,8 @@ import com.android.settingslib.mobile.dataservice.MobileNetworkInfoEntity;
 import com.android.settingslib.mobile.dataservice.SubscriptionInfoEntity;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.ThreadUtils;
+
+import kotlin.Unit;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -346,6 +349,16 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         collectAirplaneModeAndFinishIfOn(this);
+
+        LifecycleOwner viewLifecycleOwner = getViewLifecycleOwner();
+        new SubscriptionRepository(requireContext())
+                .collectSubscriptionVisible(mSubId, viewLifecycleOwner, (isVisible) -> {
+                    if (!isVisible) {
+                        Log.d(LOG_TAG, "Due to subscription not visible, closes page");
+                        finishFragment();
+                    }
+                    return Unit.INSTANCE;
+                });
     }
 
     @Override
@@ -517,11 +530,6 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
                 mSubscriptionInfoEntity = entity;
                 Log.d(LOG_TAG, "Set subInfo to default subInfo.");
             }
-        }
-        if (mSubscriptionInfoEntity == null && getActivity() != null) {
-            // If the current subId is not existed, finish it.
-            finishFragment();
-            return;
         }
         onSubscriptionDetailChanged();
     }
