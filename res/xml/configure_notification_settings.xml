@@ -243,6 +243,12 @@
             android:fragment="com.android.settings.libremobileos.edgelight.AmbientEdgeLightSettings"
             settings:requiresConfig="@bool/config_show_ambient_edge_light" />
 
+        <com.libremobileos.support.preferences.SystemSettingSwitchPreference
+            android:key="notification_force_non_dismissible"
+            android:order="30"
+            android:title="@string/notification_force_non_dismissible_title"
+            android:summary="@string/notification_force_non_dismissible_summary" />
+
         <!-- Notification lights -->
         <com.libremobileos.support.preferences.SelfRemovingPreference
             android:key="notification_lights"
