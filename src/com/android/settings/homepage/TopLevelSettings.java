@@ -88,7 +88,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
 
     @Override
     protected int getPreferenceScreenResId() {
-        return Flags.homepageRevamp() ? R.xml.top_level_settings_v2 : R.xml.top_level_settings;
+        return Flags.homepageRevamp() ? R.xml.lmo_top_level_settings : R.xml.top_level_settings;
     }
 
     @Override
@@ -395,7 +395,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(
                     Flags.homepageRevamp()
-                            ? R.xml.top_level_settings_v2
+                            ? R.xml.lmo_top_level_settings
                             : R.xml.top_level_settings) {
 
                 @Override
