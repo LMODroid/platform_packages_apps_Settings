@@ -93,14 +93,13 @@ class AllAppListModel(
 ) : AppListModel<AppRecordWithSize> {
 
     override fun getSpinnerOptions(recordList: List<AppRecordWithSize>): List<SpinnerOption> {
-        val hasDisabled = recordList.any(isDisabled)
-        val hasHidden = recordList.any(isHidden)
-        val hasInstant = recordList.any(isInstant)
-        if (!hasDisabled && !hasInstant && !hasHidden) return emptyList()
-        val options = mutableListOf(SpinnerItem.All, SpinnerItem.Enabled)
-        if (hasDisabled) options += SpinnerItem.Disabled
-        if (hasHidden) options += SpinnerItem.Hidden
-        if (hasInstant) options += SpinnerItem.Instant
+        val options = listOf(
+            SpinnerItem.All,
+            SpinnerItem.Enabled,
+            SpinnerItem.Disabled,
+            SpinnerItem.Hidden,
+            SpinnerItem.Instant
+        )
         return options.map {
             SpinnerOption(
                 id = it.ordinal,
