@@ -756,4 +756,7 @@
 
     <!-- List of MVNO. Do not translate -->
     <integer-array name="datausage_hiding_carrier_service_carrier_id" translatable="false"/>
+
+    <!-- Maximum allowed screen timeout setting in milliseconds -->
+    <integer name="config_maximumScreenOffTimeout">-1</integer>
 </resources>
