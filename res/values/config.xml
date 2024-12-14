@@ -839,4 +839,7 @@
 
     <!-- Package name for diagnostics app. -->
     <string name="config_device_diagnostics_package_name" translatable="false">com.android.devicediagnostics</string>
+
+    <!-- Maximum allowed screen timeout setting in milliseconds -->
+    <integer name="config_maximumScreenOffTimeout">-1</integer>
 </resources>

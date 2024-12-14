@@ -75,6 +75,7 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
     private FooterPreference mPrivacyPreference;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
     private SensorPrivacyManager mPrivacyManager;
+    private long mDeviceDefinedMaxTimeout = -1;
     private final BroadcastReceiver mReceiver =
             new BroadcastReceiver() {
                 @Override
@@ -140,6 +141,11 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         mPrivacyChangedListener = (sensor, enabled) -> mAdaptiveSleepController.updatePreference();
         mAdditionalTogglePreferenceController = FeatureFactory.getFeatureFactory()
                 .getDisplayFeatureProvider().createAdditionalPreference(context);
+        try {
+            mDeviceDefinedMaxTimeout = Long.valueOf(getResources().getInteger(
+                    R.integer.config_maximumScreenOffTimeout));
+        } catch (NumberFormatException  e) {
+        }
     }
 
     @Override
@@ -322,7 +328,11 @@ public class ScreenTimeoutSettings extends RadioButtonPickerFragment
         }
         mAdmin = RestrictedLockUtilsInternal.checkIfMaximumTimeToLockIsSet(context);
         if (mAdmin != null) {
-            return dpm.getMaximumTimeToLock(null /* admin */, UserHandle.myUserId());
+            return Math.min(dpm.getMaximumTimeToLock(null /* admin */, UserHandle.myUserId()),
+                    mDeviceDefinedMaxTimeout != -1L ? mDeviceDefinedMaxTimeout : Long.MAX_VALUE);
+        }
+        if (mDeviceDefinedMaxTimeout != -1) {
+            return mDeviceDefinedMaxTimeout;
         }
         return Long.MAX_VALUE;
     }
