@@ -26,6 +26,8 @@ import android.hardware.display.DisplayManager
 import android.hardware.display.DisplayManager.DisplayListener
 import android.os.UserManager
 import android.provider.Settings.System
+import android.view.Display
+import android.view.DisplayInfo
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
@@ -195,9 +197,24 @@ class BrightnessLevelPreference :
         private val Context.displayManager: DisplayManager
             get() = getSystemService(DisplayManager::class.java)!!
 
+        /**
+         * The display to read brightness from. In an overlay display the brightness is always
+         * zero, so fall back to the default (internal) display there.
+         */
+        private val Context.brightnessDisplay: Display
+            get() {
+                val currentDisplay = display
+                val info = DisplayInfo()
+                currentDisplay.getDisplayInfo(info)
+                if (info.type == Display.TYPE_OVERLAY) {
+                    displayManager.getDisplay(Display.DEFAULT_DISPLAY)?.let { return it }
+                }
+                return currentDisplay
+            }
+
         private val Context.brightnessPercent: Double
             get() {
-                val info: BrightnessInfo = display.brightnessInfo ?: return 0.0
+                val info: BrightnessInfo = brightnessDisplay.brightnessInfo ?: return 0.0
                 return info.brightnessInGammaSpace.toPercentage()
             }
 
