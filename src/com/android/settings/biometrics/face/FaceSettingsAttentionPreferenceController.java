@@ -134,6 +134,7 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mContext.getResources().getBoolean(R.bool.config_show_face_unlock_attention_switch)
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }
