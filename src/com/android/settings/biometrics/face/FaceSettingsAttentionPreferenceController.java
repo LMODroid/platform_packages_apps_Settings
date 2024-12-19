@@ -25,6 +25,7 @@ import android.provider.Settings;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.R;
 import com.android.settings.Utils;
 
 /**
@@ -118,6 +119,7 @@ public class FaceSettingsAttentionPreferenceController extends FaceSettingsPrefe
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return mContext.getResources().getBoolean(R.bool.config_show_face_unlock_attention_switch)
+                ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 }
