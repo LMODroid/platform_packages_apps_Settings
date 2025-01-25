@@ -199,8 +199,10 @@
         <!-- Notification lights -->
         <com.libremobileos.support.preferences.SelfRemovingPreference
             android:key="notification_lights"
+            android:title="@string/notification_light_title"
             settings:requiresConfig="@*android:bool/config_intrusiveNotificationLed"
-            settings:replacesKey="notification_pulse" />
+            settings:replacesKey="notification_pulse"
+            android:fragment="com.android.settings.libremobileos.notificationlight.NotificationLightSettings" />
 
         <!-- Heads up -->
         <com.libremobileos.support.preferences.GlobalSettingSwitchPreference
