@@ -68,8 +68,10 @@
     <!-- Battery light -->
     <com.libremobileos.support.preferences.SelfRemovingPreference
         android:key="battery_lights"
+        android:title="@string/battery_light_title"
         settings:requiresConfig="@*android:integer/config_deviceLightCapabilities"
-        settings:requiresConfigMask="64" />
+        settings:requiresConfigMask="64"
+        android:fragment="com.android.settings.libremobileos.notificationlight.BatteryLightSettings" />
 
     <SwitchPreferenceCompat
         android:key="battery_percentage"
