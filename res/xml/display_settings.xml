@@ -81,6 +81,13 @@
             <intent android:action="org.lineageos.settings.device.DOZE_SETTINGS" />
         </com.android.settingslib.PrimarySwitchPreference>
 
+        <!-- Always-on display timeout, for externally managed doze -->
+        <SwitchPreferenceCompat
+            android:key="doze_always_on_timeout"
+            android:title="@string/doze_always_on_timeout_switch_title"
+            android:summary="@string/doze_always_on_timeout_switch_summary"
+            settings:controller="com.android.settings.display.AmbientDisplayAlwaysOnTimeoutPreferenceController" />
+
         <com.android.settingslib.RestrictedPreference
             android:fragment="com.android.settings.display.FoldLockBehaviorSettings"
             android:key="fold_lock_behavior"

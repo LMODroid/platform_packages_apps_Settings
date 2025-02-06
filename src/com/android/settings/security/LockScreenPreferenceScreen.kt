@@ -23,7 +23,7 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.LockScreenSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.display.AmbientDisplayAlwaysOnPreference
+import com.android.settings.display.AmbientDisplayAlwaysOnScreen
 import com.android.settings.flags.Flags
 import com.android.settings.notification.LockScreenNotificationPreferenceController
 import com.android.settings.utils.makeLaunchIntent
@@ -89,7 +89,7 @@ open class LockScreenPreferenceScreen(private val context: Context) :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             if (!ambientAod()) {
-                +AmbientDisplayAlwaysOnPreference()
+                +AmbientDisplayAlwaysOnScreen.KEY
             }
         }
 
