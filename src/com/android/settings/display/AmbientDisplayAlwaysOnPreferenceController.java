@@ -27,10 +27,10 @@ import android.text.TextUtils;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
-import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.core.BasePreferenceController;
 
 // LINT.IfChange
-public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreferenceController {
+public class AmbientDisplayAlwaysOnPreferenceController extends BasePreferenceController {
 
     private final int ON = 1;
     private final int OFF = 0;
@@ -71,19 +71,6 @@ public class AmbientDisplayAlwaysOnPreferenceController extends TogglePreference
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_display;
-    }
-
-    @Override
-    public boolean isChecked() {
-        return getConfig().alwaysOnEnabled(MY_USER);
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        int enabled = isChecked ? ON : OFF;
-        Settings.Secure.putInt(
-                mContext.getContentResolver(), Settings.Secure.DOZE_ALWAYS_ON, enabled);
-        return true;
     }
 
     @Override
