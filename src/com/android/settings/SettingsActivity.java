@@ -59,6 +59,7 @@ import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.OnActivityResultListener;
 import com.android.settings.core.SettingsBaseActivity;
 import com.android.settings.core.SubSettingLauncher;
+import com.android.settings.core.gateway.LMOSettingsGateway;
 import com.android.settings.core.gateway.SettingsGateway;
 import com.android.settings.dashboard.DashboardFeatureProvider;
 import com.android.settings.homepage.SettingsHomepageActivity;
@@ -659,6 +660,9 @@ public class SettingsActivity extends SettingsBaseActivity
         // except for a few that have their own activities.
         for (int i = 0; i < SettingsGateway.ENTRY_FRAGMENTS.length; i++) {
             if (SettingsGateway.ENTRY_FRAGMENTS[i].equals(fragmentName)) return true;
+        }
+        for (int i = 0; i < LMOSettingsGateway.ENTRY_FRAGMENTS.length; i++) {
+            if (LMOSettingsGateway.ENTRY_FRAGMENTS[i].equals(fragmentName)) return true;
         }
         return false;
     }
