@@ -66,7 +66,7 @@ public class FactoryResetPreferenceController extends BasePreferenceController i
         if (mPreferenceKey.equals(preference.getKey())) {
             // If battery level is less than 15% and not charger plugged in.
             // then don't proceed to factory reset.
-            if (mIsBatteryPresent && mBatteryInfo.batteryLevel < 15
+            if (mIsBatteryPresent && mBatteryInfo != null && mBatteryInfo.batteryLevel < 15
                     && mBatteryInfo.pluggedStatus == 0) {
                 showBatteryLowDialog();
                 return true;
