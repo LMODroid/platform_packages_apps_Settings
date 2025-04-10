@@ -155,6 +155,7 @@ public class BiometricFragment extends InstrumentedFragment {
         if (promptInfo.isUseDefaultSubtitle()) {
             promptBuilder.setUseDefaultSubtitle();
         }
+        promptBuilder.setClassNameIfItIsConfirmDeviceCredentialActivity();
         mBiometricPrompt = promptBuilder.build();
     }
 
