@@ -250,7 +250,7 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
                             SettingsEnums.ACTION_NOT_SUPPORTED_SYSTEM_LANGUAGE);
                 }
             } else {
-                mAdapter.notifyListChanged(localeInfo);
+                mAdapter.notifyListChanged();
             }
             mAdapter.setCacheItemList();
         } else if (requestCode == DIALOG_ADD_SYSTEM_LOCALE) {
@@ -565,6 +565,8 @@ public class LocaleListEditor extends RestrictedSettingsFragment implements View
         if (oldLocale != null && !newLocale.getLocale().equals(
                 oldLocale.getLocale())) {
             displayDialogFragment(newLocale, false);
+        } else {
+            mAdapter.doTheUpdate();
         }
     }
 
