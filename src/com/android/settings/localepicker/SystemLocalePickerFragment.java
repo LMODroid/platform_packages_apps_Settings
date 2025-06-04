@@ -170,7 +170,8 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
     }
 
     private void filterSearch(@Nullable String query) {
-        if (mSystemLocaleAllListPreferenceController == null) {
+        if (mSystemLocaleAllListPreferenceController == null
+                || mSuggestedListPreferenceController == null) {
             Log.d(TAG, "filterSearch(), can not get preference.");
             return;
         }
@@ -180,6 +181,7 @@ public class SystemLocalePickerFragment extends DashboardFragment implements
         }
 
         mOriginalLocaleInfos = mSystemLocaleAllListPreferenceController.getSupportedLocaleList();
+        mOriginalLocaleInfos.addAll(mSuggestedListPreferenceController.getSuggestedLocaleList());
         // If we haven't load apps list completely, don't filter anything.
         if (mOriginalLocaleInfos == null) {
             Log.w(TAG, "Locales haven't loaded completely yet, so nothing can be filtered");
