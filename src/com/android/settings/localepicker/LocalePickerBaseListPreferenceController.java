@@ -265,6 +265,9 @@ public abstract class LocalePickerBaseListPreferenceController extends
     @VisibleForTesting
     void switchFragment(LocaleStore.LocaleInfo localeInfo) {
         boolean shouldShowLocaleEditor = shouldShowLocaleEditor(localeInfo);
+        if (mLocaleList != null && mLocaleList.size() == 1) {
+            localeInfo = mLocaleList.iterator().next();
+        }
         if (shouldShowLocaleEditor) {
             List<LocaleStore.LocaleInfo> feedItemList = getUserLocaleList();
             feedItemList.add(localeInfo);
