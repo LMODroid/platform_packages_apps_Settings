@@ -65,6 +65,16 @@
         android:fragment="com.android.settings.libremobileos.health.ChargingControlSettings"
         settings:requiresService="lineagehealth" />
 
+    <!-- Charging speed -->
+    <ListPreference
+        android:entries="@*android:array/charging_speed_entries"
+        android:entryValues="@*android:array/charging_speed_values"
+        android:key="charging_speed"
+        android:summary="%s"
+        android:title="@*android:string/charging_speed"
+        settings:controller="com.android.settings.fuelgauge.ChargingSpeedPreferenceController"
+        settings:requiresService="lineagehealth" />
+
     <!-- Battery light -->
     <com.libremobileos.support.preferences.SelfRemovingPreference
         android:key="battery_lights"
@@ -78,12 +88,6 @@
         android:title="@string/battery_percentage"
         android:summary="@string/battery_percentage_description"
         settings:controller="com.android.settings.display.BatteryPercentagePreferenceController" />
-
-    <SwitchPreferenceCompat
-        android:key="fast_charging"
-        android:title="@string/fast_charging_title"
-        android:summary="@string/fast_charging_summary"
-        settings:controller="com.android.settings.fuelgauge.FastChargingPreferenceController"/>
 
     <Preference
         android:key="battery_info"
