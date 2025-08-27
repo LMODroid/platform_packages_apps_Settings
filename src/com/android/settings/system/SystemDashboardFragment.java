@@ -30,11 +30,15 @@ import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.util.List;
+
 // LINT.IfChange
 @SearchIndexable
 public class SystemDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "SystemDashboardFrag";
+    private static final String KEY_BUTTON_SETTINGS = "button_settings";
+    private static final String KEY_STATUSBAR_SETTINGS = "statusbar_settings";
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -89,6 +93,16 @@ public class SystemDashboardFragment extends DashboardFragment {
      * For Search.
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.system_dashboard_fragment);
+            new BaseSearchIndexProvider(R.xml.system_dashboard_fragment) {
+        @Override
+        public List<String> getNonIndexableKeys(Context context) {
+            final List<String> keys = super.getNonIndexableKeys(context);
+            if (!context.getResources().getBoolean(R.bool.config_show_lmo_features_settings)) {
+                keys.add(KEY_BUTTON_SETTINGS);
+                keys.add(KEY_STATUSBAR_SETTINGS);
+            }
+            return keys;
+        }
+    };
 }
 // LINT.ThenChange(SystemDashboardScreen.kt)
