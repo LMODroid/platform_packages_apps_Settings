@@ -43,6 +43,8 @@ public class SystemDashboardFragment extends DashboardFragment {
     private static final String KEY_ADVANCED = "advanced_category";
 
     private static final String TAG = "SystemDashboardFrag";
+    private static final String KEY_BUTTON_SETTINGS = "button_settings";
+    private static final String KEY_STATUSBAR_SETTINGS = "statusbar_settings";
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -145,6 +147,17 @@ public class SystemDashboardFragment extends DashboardFragment {
                     final SearchIndexableResource sir = new SearchIndexableResource(context);
                     sir.xmlResId = getResId(context);
                     return Arrays.asList(sir);
+                }
+
+                @Override
+                public List<String> getNonIndexableKeys(Context context) {
+                    final List<String> keys = super.getNonIndexableKeys(context);
+                    if (!context.getResources().getBoolean(
+                            R.bool.config_show_lmo_features_settings)) {
+                        keys.add(KEY_BUTTON_SETTINGS);
+                        keys.add(KEY_STATUSBAR_SETTINGS);
+                    }
+                    return keys;
                 }
             };
 }
