@@ -116,11 +116,6 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             )
         }
         initServiceData(this, targetSubId, callbackListener)
-        if (!onboardingService.isUsableTargetSubscriptionId) {
-            Log.e(TAG, "The subscription id is not usable.")
-            finish()
-            return
-        }
 
         if (onboardingService.activeSubInfoList.isEmpty()) {
             // TODO: refactor and replace the ToggleSubscriptionDialogActivity
@@ -593,6 +588,13 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                 }
             }
             context.startActivityAsUser(intent, UserHandle.CURRENT)
+        }
+
+        @JvmStatic
+        fun startSimOnboardingActivity(context: Context) {
+            val intent = Intent(context, SimOnboardingActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
         }
 
         var onboardingService:SimOnboardingService = SimOnboardingService()
