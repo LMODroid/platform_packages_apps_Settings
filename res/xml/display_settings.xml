@@ -137,6 +137,15 @@
             settings:controller="com.android.settings.display.ColorModePreferenceController"
             settings:keywords="@string/keywords_color_mode"/>
 
+        <com.libremobileos.support.preferences.SelfRemovingPreference
+            android:key="live_display_color_profile"
+            android:title="@string/live_display_color_profile_title"
+            android:fragment="com.android.settings.libremobileos.livedisplay.ColorProfileFragment"
+            settings:controller="com.android.settings.libremobileos.livedisplay.ColorProfilePreferenceController"
+            settings:replacesKey="color_mode"
+            settings:requiresConfig="@*android:bool/config_enableLiveDisplay"
+            settings:requiresFeature="lineagehardware:FEATURE_DISPLAY_MODES" />
+
         <Preference
             android:fragment="com.android.settings.display.ColorContrastFragment"
             android:key="color_contrast"
