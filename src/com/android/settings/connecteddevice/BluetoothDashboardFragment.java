@@ -102,8 +102,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
         if (isCatalystEnabled()) {
             return;
         }
-        String callingAppPackageName = PasswordUtils.getCallingAppPackageName(
-                getActivity().getActivityToken());
+        String callingAppPackageName = resolveInitialCallingPackage();
         String action = getIntent() != null ? getIntent().getAction() : "";
         if (DEBUG) {
             Log.d(TAG, "onActivityCreated() calling package name is : " + callingAppPackageName
@@ -128,8 +127,7 @@ public class BluetoothDashboardFragment extends DashboardFragment {
         super.onStart();
         if (isCatalystEnabled()) {
             Activity activity = requireActivity();
-            String callingAppPackageName = PasswordUtils.getCallingAppPackageName(
-                    activity.getActivityToken());
+            String callingAppPackageName = resolveInitialCallingPackage();
             Intent intent = activity.getIntent();
             String action = intent != null ? intent.getAction() : "";
             if (DEBUG) {
@@ -150,6 +148,19 @@ public class BluetoothDashboardFragment extends DashboardFragment {
             mAlwaysDiscoverable.stop();
             mAlwaysDiscoverable = null;
         }
+    }
+
+    @Nullable
+    private String resolveInitialCallingPackage() {
+        Activity activity = getActivity();
+        if (activity instanceof SettingsActivity) {
+            return ((SettingsActivity) activity).getInitialCallingPackage();
+        }
+
+        if (activity != null) {
+            return PasswordUtils.getCallingAppPackageName(activity.getActivityToken());
+        }
+        return null;
     }
 
     @VisibleForTesting
