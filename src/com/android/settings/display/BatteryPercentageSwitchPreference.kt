@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Preconditio
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
+import com.libremobileos.providers.LMOSettings.System.STATUS_BAR_SHOW_BATTERY_PERCENT
 
 // LINT.IfChange
 class BatteryPercentageSwitchPreference :
@@ -94,7 +95,7 @@ class BatteryPercentageSwitchPreference :
     }
 
     companion object {
-        const val KEY = Settings.System.SHOW_BATTERY_PERCENT
+        const val KEY = STATUS_BAR_SHOW_BATTERY_PERCENT
     }
 }
 // LINT.ThenChange(BatteryPercentagePreferenceController.java)
