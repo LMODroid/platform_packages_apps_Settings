@@ -20,7 +20,7 @@ import android.provider.Settings.Secure.LOCK_SCREEN_ALLOW_PRIVATE_NOTIFICATIONS
 import android.provider.Settings.Secure.LOCK_SCREEN_SHOW_NOTIFICATIONS
 import com.android.settings.R
 import com.android.settings.Settings.LockScreenSettingsActivity
-import com.android.settings.display.AmbientDisplayAlwaysOnPreference
+import com.android.settings.display.AmbientDisplayAlwaysOnScreen
 import com.android.settings.flags.Flags
 import com.android.settings.notification.LockScreenNotificationPreferenceController
 import com.android.settings.utils.makeLaunchIntent
@@ -79,7 +79,7 @@ open class LockScreenPreferenceScreen(private val context: Context) :
 
     override fun getPreferenceHierarchy(context: Context) =
         preferenceHierarchy(context, this) {
-            +AmbientDisplayAlwaysOnPreference()
+            +AmbientDisplayAlwaysOnScreen.KEY
         }
 
     companion object {
