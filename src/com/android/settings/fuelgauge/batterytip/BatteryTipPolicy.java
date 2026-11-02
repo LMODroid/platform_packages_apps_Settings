@@ -230,7 +230,7 @@ public class BatteryTipPolicy {
         batteryTipEnabled = mParser.getBoolean(KEY_BATTERY_TIP_ENABLED, true);
         summaryEnabled = mParser.getBoolean(KEY_SUMMARY_ENABLED, false);
         batterySaverTipEnabled = mParser.getBoolean(KEY_BATTERY_SAVER_TIP_ENABLED, true);
-        highUsageEnabled = mParser.getBoolean(KEY_HIGH_USAGE_ENABLED, true);
+        highUsageEnabled = false; //mParser.getBoolean(KEY_HIGH_USAGE_ENABLED, true);
         highUsageAppCount = mParser.getInt(KEY_HIGH_USAGE_APP_COUNT, 3);
         highUsagePeriodMs =
                 mParser.getLong(KEY_HIGH_USAGE_PERIOD_MS, Duration.ofHours(2).toMillis());
