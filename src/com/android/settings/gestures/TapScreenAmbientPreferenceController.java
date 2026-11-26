@@ -16,26 +16,62 @@
 
 package com.android.settings.gestures;
 
+import static android.provider.Settings.Secure.DOZE_ENABLED;
 import static android.provider.Settings.Secure.DOZE_SINGLE_TAP_GESTURE_AMBIENT;
 
 import android.annotation.UserIdInt;
 import android.content.Context;
+import android.database.ContentObserver;
 import android.hardware.display.AmbientDisplayConfiguration;
-import android.os.SystemProperties;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.provider.Settings;
+
+import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 public class TapScreenAmbientPreferenceController extends GesturePreferenceController {
 
     private static final String PREF_KEY_VIDEO = "gesture_tap_screen_video";
 
     private AmbientDisplayConfiguration mAmbientConfig;
+    private final ContentObserver mSettingsObserver;
+    private Preference mPreference;
     @UserIdInt
     private final int mUserId;
 
     public TapScreenAmbientPreferenceController(Context context, String key) {
         super(context, key);
         mUserId = UserHandle.myUserId();
+        mSettingsObserver = new ContentObserver(new Handler(Looper.getMainLooper())) {
+            @Override
+            public void onChange(boolean selfChange) {
+                if (mPreference != null) {
+                    mPreference.setVisible(getAvailabilityStatus() == AVAILABLE);
+                }
+            }
+        };
+    }
+
+    @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mContext.getContentResolver().registerContentObserver(
+                Settings.Secure.getUriFor(DOZE_ENABLED), false,
+                mSettingsObserver, UserHandle.USER_CURRENT);
+    }
+
+    @Override
+    public void onStop() {
+        mContext.getContentResolver().unregisterContentObserver(mSettingsObserver);
+        super.onStop();
     }
 
     public TapScreenAmbientPreferenceController setConfig(AmbientDisplayConfiguration config) {
